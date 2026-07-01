@@ -1,0 +1,2407 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* Dark Theme Variables (Default) */
+    --bg-base: #060814;
+    --bg-surface: rgba(10, 15, 30, 0.6);
+    --bg-surface-hover: rgba(15, 23, 42, 0.8);
+    --border-color: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(255, 75, 43, 0.3);
+    --accent-primary: #ff4b2b; /* Flame Red-Orange */
+    --accent-secondary: #ff8c00; /* Neon Orange */
+    --accent-tertiary: #ff2d55; /* Rose Crimson */
+    --accent-pink: #ff1f71; /* Neon Pink */
+    --accent-gold: #ffa200; /* Liquid Sun Gold */
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --glow-color: rgba(255, 75, 43, 0.15);
+    --shadow-color: rgba(0, 0, 0, 0.6);
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --gradient-primary: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    --gradient-purple: linear-gradient(135deg, var(--accent-tertiary) 0%, var(--accent-secondary) 100%);
+    --gradient-flame: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-primary) 50%, var(--accent-gold) 100%);
+}
+
+.light-mode {
+    /* Light Theme Variables */
+    --bg-base: #f8fafc;
+    --bg-surface: rgba(255, 255, 255, 0.7);
+    --bg-surface-hover: rgba(255, 255, 255, 0.95);
+    --border-color: rgba(15, 23, 42, 0.08);
+    --border-hover: rgba(247, 127, 0, 0.3);
+    --accent-primary: #e63946; /* Royal Red */
+    --accent-secondary: #f77f00; /* Vibrant Orange */
+    --accent-tertiary: #fcbf49; 
+    --accent-pink: #d90429;
+    --accent-gold: #ffb703;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --glow-color: rgba(230, 57, 70, 0.08);
+    --shadow-color: rgba(15, 23, 42, 0.08);
+    --gradient-primary: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    --gradient-purple: linear-gradient(135deg, #d62828 0%, var(--accent-secondary) 100%);
+    --gradient-flame: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-primary) 50%, var(--accent-gold) 100%);
+}
+
+/* Base Reset & Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-base);
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(27, 13, 45, 0.45) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(6, 15, 35, 0.45) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0) 0%, rgba(3, 4, 11, 0.65) 100%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    line-height: 1.6;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+body.light-mode {
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 183, 3, 0.05) 0%, transparent 35%),
+        radial-gradient(circle at 80% 70%, rgba(230, 57, 70, 0.05) 0%, transparent 35%);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-base);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-primary);
+}
+
+/* Background Canvas */
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Navigation Bar */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1.25rem 5%;
+    transition: padding 0.3s ease, background-color 0.3s ease;
+}
+
+header.scrolled {
+    padding: 0.8rem 5%;
+    background-color: rgba(6, 8, 20, 0.8);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-color);
+}
+.light-mode header.scrolled {
+    background-color: rgba(248, 250, 252, 0.8);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-decoration: none;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo span {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logo-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-primary);
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 10px var(--accent-primary);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--text-primary);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.theme-toggle-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 10px var(--glow-color);
+    transform: rotate(15deg);
+}
+
+.theme-toggle-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+/* Glass Card & Grid Layouts */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+section {
+    padding: 8rem 0 4rem;
+    position: relative;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-header h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: -0.5px;
+}
+
+.section-header h2 span {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.section-header p {
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+}
+
+.glass-card {
+    background: var(--bg-surface);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 8px 32px 0 var(--shadow-color);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+    border-color: var(--border-hover);
+    box-shadow: 0 12px 40px 0 var(--glow-color), 0 8px 32px 0 var(--shadow-color);
+}
+
+/* 3D Tilt Container */
+.tilt-card-wrap {
+    perspective: 1000px;
+}
+
+.tilt-card {
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease;
+}
+
+.tilt-inner {
+    transform: translateZ(30px);
+}
+
+/* Hero Section */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 6rem;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.hero-content h3 {
+    font-family: var(--font-heading);
+    color: var(--accent-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+}
+
+.hero-content h1 {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -1.5px;
+}
+
+.hero-content h1 span {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-typing {
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    min-height: 40px;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.typed-cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1.4rem;
+    background-color: var(--accent-primary);
+    animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+.hero-desc {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    max-width: 580px;
+}
+
+.hero-btns {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 3.5rem;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 2rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-family: var(--font-body);
+}
+
+.btn-primary {
+    background: var(--gradient-primary);
+    color: #060814;
+    border: none;
+    box-shadow: 0 4px 20px rgba(0, 242, 254, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0, 242, 254, 0.5);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: var(--accent-primary);
+    transform: translateY(-3px);
+}
+
+.light-mode .btn-secondary:hover {
+    background: rgba(15, 23, 42, 0.03);
+}
+
+.hero-socials {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.hero-socials span {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.social-icon {
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.social-icon:hover {
+    color: var(--accent-primary);
+    transform: translateY(-2px);
+}
+
+.social-icon svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+}
+
+/* 3D Floating Mesh Visualizer (Hero Right Side) */
+.hero-visualizer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.visualizer-container {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    position: relative;
+    background: radial-gradient(circle, rgba(255,75,43,0.05) 0%, rgba(255,140,0,0.05) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 40px rgba(255,255,255,0.02);
+}
+
+.visualizer-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 1px dashed var(--border-color);
+    border-radius: 50%;
+    animation: rotateRing 20s linear infinite;
+}
+
+.visualizer-ring.ring-2 {
+    width: 80%;
+    height: 80%;
+    border: 1px solid rgba(255, 140, 0, 0.15);
+    animation: rotateRingInverse 15s linear infinite;
+}
+
+.visualizer-ring.ring-3 {
+    width: 60%;
+    height: 60%;
+    border: 2px solid var(--accent-primary);
+    opacity: 0.1;
+    animation: rotateRing 10s linear infinite;
+}
+
+.visualizer-avatar {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 50px var(--glow-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: transform 0.5s ease;
+}
+
+.visualizer-avatar:hover {
+    transform: scale(1.05);
+}
+
+.visualizer-avatar svg {
+    width: 100px;
+    height: 100px;
+    fill: #060814;
+}
+
+@keyframes rotateRing {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes rotateRingInverse {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+}
+
+/* About / FocusVision Playground Widget */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.about-details p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-num {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--accent-primary);
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 0.25rem;
+}
+
+/* Cyberpunk Focus Tracker Widget */
+.focus-widget {
+    background: rgba(10, 15, 30, 0.85);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    font-family: monospace;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    position: relative;
+}
+
+.focus-header {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.focus-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.focus-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+.focus-dot.red { background: #ef4444; }
+.focus-dot.yellow { background: #f59e0b; }
+.focus-dot.green { background: #10b981; }
+
+.focus-title {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+.focus-body {
+    padding: 1.5rem;
+    position: relative;
+}
+
+.focus-radar-container {
+    height: 160px;
+    background: radial-gradient(circle, rgba(255,75,43,0.03) 0%, transparent 70%);
+    border: 1px solid rgba(255,75,43,0.08);
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    cursor: crosshair;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.focus-radar-sweep {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, rgba(255, 75, 43, 0.15) 0deg, transparent 90deg, transparent 360deg);
+    animation: sweep 4s linear infinite;
+    transform-origin: center;
+    pointer-events: none;
+}
+
+@keyframes sweep {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.radar-grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(255, 75, 43, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 75, 43, 0.04) 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-position: center;
+    pointer-events: none;
+}
+
+.focus-reticle {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 1.5px solid var(--accent-primary);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    transition: left 0.15s cubic-bezier(0.25, 0.8, 0.25, 1), top 0.15s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 0 12px var(--accent-primary);
+}
+
+.focus-reticle::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    background: var(--accent-primary);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.focus-console {
+    margin-top: 1.25rem;
+    color: #10b981;
+    font-size: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.03);
+}
+
+.console-line span {
+    color: var(--text-muted);
+}
+
+/* Centered Skills Planetarium Core */
+.skills-console-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.skills-planetarium-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    transform-style: preserve-3d;
+    perspective: 1200px;
+}
+
+.skills-planetarium {
+    position: relative;
+    width: 660px;
+    height: 660px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+}
+
+.sun-logo {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.25);
+    z-index: 12;
+}
+
+.sun-logo svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+@keyframes spinReact {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+
+.skills-sun {
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fffdf0 0%, #ffea00 35%, #ffa200 70%, #ff3c00 100%);
+    box-shadow: 
+        0 0 40px rgba(255, 234, 0, 0.7), 
+        0 0 80px rgba(255, 162, 0, 0.5), 
+        0 0 120px rgba(255, 60, 0, 0.3), 
+        inset -8px -8px 20px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    cursor: default;
+    user-select: none;
+    animation: pulseSkillsSun 4s ease-in-out infinite alternate;
+}
+
+@keyframes pulseSkillsSun {
+    0% { transform: scale(0.96); }
+    100% { transform: scale(1.04); }
+}
+
+/* =========================================================================
+   Cyberpunk Side Panels & Rocket Launch Pad Layout
+   ========================================================================= */
+.skills-console-grid {
+    display: grid;
+    grid-template-columns: 310px 1fr 310px;
+    gap: 2rem;
+    align-items: center;
+    width: 100%;
+}
+
+.skills-side-panel {
+    background: rgba(10, 12, 22, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 1.75rem;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.light-mode .skills-side-panel {
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+}
+
+.skills-side-panel:hover {
+    border-color: rgba(255, 140, 0, 0.3);
+    box-shadow: 0 12px 40px rgba(255, 140, 0, 0.1), 0 10px 35px rgba(0, 0, 0, 0.4);
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: monospace;
+    font-size: 0.72rem;
+    color: var(--accent-secondary);
+    letter-spacing: 1.5px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.25rem;
+    font-weight: 700;
+}
+
+.panel-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--accent-secondary);
+    box-shadow: 0 0 8px var(--accent-secondary);
+    display: inline-block;
+    animation: telemetryPulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes telemetryPulse {
+    0% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+
+.telemetry-module-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.25rem;
+}
+
+.tel-logo {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.light-mode .tel-logo {
+    background: rgba(15, 23, 42, 0.02);
+}
+
+.tel-logo svg {
+    width: 28px;
+    height: 28px;
+}
+
+.telemetry-module-title {
+    display: flex;
+    flex-direction: column;
+}
+
+.telemetry-module-title h4 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-top: 2px;
+}
+
+.telemetry-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.85rem;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+    padding-bottom: 0.45rem;
+}
+
+.light-mode .telemetry-item {
+    border-bottom-color: rgba(15, 23, 42, 0.05);
+}
+
+.label {
+    font-family: monospace;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.value {
+    font-family: monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.value.status-ok {
+    color: #10b981;
+    text-shadow: 0 0 6px rgba(16, 185, 129, 0.25);
+}
+
+.telemetry-desc-wrap {
+    margin-bottom: 1.25rem;
+}
+
+.desc-text {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-top: 0.35rem;
+    font-family: var(--font-body);
+}
+
+.telemetry-bar-wrap {
+    margin-top: 1.25rem;
+}
+
+.telemetry-bar-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.4rem;
+}
+
+.telemetry-bar {
+    width: 100%;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.light-mode .telemetry-bar {
+    background: rgba(15, 23, 42, 0.05);
+}
+
+.telemetry-bar-inner {
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: 3px;
+    transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* =========================================================================
+   Rocket Launchpad Modules & Animations
+   ========================================================================= */
+.rocket-container-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 320px;
+}
+
+.sub-skill-rocket {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 0.55rem 0.85rem;
+    border-radius: 8px;
+    margin-bottom: 0.65rem;
+    opacity: 0;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.light-mode .sub-skill-rocket {
+    background: rgba(15, 23, 42, 0.02);
+    border-color: rgba(15, 23, 42, 0.04);
+}
+
+.sub-skill-rocket:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 140, 0, 0.2);
+}
+
+.light-mode .sub-skill-rocket:hover {
+    background: rgba(15, 23, 42, 0.04);
+}
+
+.sub-skill-rocket.animate-launch {
+    animation: rocketBlastOff 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards,
+               rocketHover 4s ease-in-out infinite alternate 0.7s;
+}
+
+@keyframes rocketBlastOff {
+    0% {
+        transform: translateY(120px) scale(0.85);
+        opacity: 0;
+    }
+    60% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes rocketHover {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-4px); }
+}
+
+.mini-rocket {
+    width: 14px;
+    height: 28px;
+    position: relative;
+    flex-shrink: 0;
+    transform: rotate(0deg);
+}
+
+.mini-rocket .rocket-body {
+    width: 6px;
+    height: 16px;
+    background: linear-gradient(to right, #cbd5e1, #94a3b8);
+    border-radius: 3px 3px 1px 1px;
+    margin: 0 auto;
+    position: relative;
+    top: 5px;
+}
+
+.mini-rocket .rocket-nose {
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-bottom: 5px solid var(--accent-pink);
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.mini-rocket .rocket-fins {
+    width: 12px;
+    height: 5px;
+    background: var(--accent-pink);
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 1px;
+}
+
+.mini-rocket .rocket-fire {
+    width: 4px;
+    height: 9px;
+    background: linear-gradient(to bottom, #ffc107, #ff5722, rgba(255, 87, 34, 0));
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: flameFlicker 0.12s infinite alternate;
+}
+
+@keyframes flameFlicker {
+    0% { transform: translateX(-50%) scaleX(0.8) scaleY(0.85); }
+    100% { transform: translateX(-50%) scaleX(1.2) scaleY(1.35); }
+}
+
+.rocket-name {
+    font-family: monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+.light-mode .rocket-name {
+    color: var(--text-primary);
+}
+
+
+/* Dashed Orbits styling */
+.skills-orbit {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px dashed rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+    transform-style: preserve-3d;
+}
+
+.skills-orbit.orbit-inner { width: 290px; height: 290px; z-index: 3; }
+.skills-orbit.orbit-middle { width: 430px; height: 430px; z-index: 4; }
+.skills-orbit.orbit-outer { width: 570px; height: 570px; z-index: 5; }
+
+.light-mode .skills-orbit {
+    border-color: rgba(15, 23, 42, 0.08);
+}
+
+/* Light mode adjustments for Sun details */
+.light-mode .sun-header {
+    color: rgba(15, 23, 42, 0.6);
+}
+.light-mode .sun-title {
+    color: #0f172a;
+}
+.light-mode .sun-libs {
+    color: rgba(15, 23, 42, 0.8);
+}
+
+.skill-planet {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 76px;
+    height: 76px;
+    cursor: pointer;
+    z-index: 15;
+    transform-style: preserve-3d;
+}
+
+.skill-planet-inner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 76px;
+    height: 76px;
+    border-radius: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 18px;
+    overflow: hidden;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    color: var(--text-primary);
+    background: rgba(8, 12, 28, 0.88);
+    border: 2px solid var(--planet-glow-solid);
+    box-shadow: 0 0 15px var(--planet-glow), inset 0 0 10px rgba(255,255,255,0.05);
+    transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.25), 
+                transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.25), 
+                box-shadow 0.4s ease,
+                border-radius 0.4s ease;
+}
+
+.skill-icon-wrap {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.skill-svg-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.skill-name-label {
+    opacity: 0;
+    white-space: nowrap;
+    transition: opacity 0.3s ease, margin-left 0.4s ease;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-left: 0;
+    pointer-events: none;
+}
+
+.skill-python {
+    --planet-glow-solid: #10b981;
+    --planet-glow: rgba(16, 185, 129, 0.4);
+    animation: orbitPython 18s linear infinite;
+}
+
+.skill-cv {
+    --planet-glow-solid: #ff8c00;
+    --planet-glow: rgba(255, 140, 0, 0.4);
+    animation: orbitCV 26s linear infinite;
+}
+
+.skill-dl {
+    --planet-glow-solid: #ef4444;
+    --planet-glow: rgba(239, 68, 68, 0.4);
+    animation: orbitDL 26s linear infinite;
+}
+
+.skill-js {
+    --planet-glow-solid: #3b82f6;
+    --planet-glow: rgba(59, 130, 246, 0.4);
+    animation: orbitJS 34s linear infinite;
+}
+
+.skill-web {
+    --planet-glow-solid: #a855f7;
+    --planet-glow: rgba(168, 85, 247, 0.4);
+    animation: orbitWeb 34s linear infinite;
+}
+
+.skill-git {
+    --planet-glow-solid: #06b6d4;
+    --planet-glow: rgba(6, 182, 212, 0.4);
+    animation: orbitGit 34s linear infinite;
+}
+
+.skills-planetarium:hover .skill-planet {
+    animation-play-state: paused;
+}
+
+.skill-planet.active .skill-planet-inner {
+    box-shadow: 0 0 25px var(--planet-glow), 0 0 0 3px rgba(255, 255, 255, 0.85);
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+.light-mode .skill-planet.active .skill-planet-inner {
+    box-shadow: 0 0 25px var(--planet-glow), 0 0 0 3px rgba(15, 23, 42, 0.85);
+}
+
+.skill-planet:hover .skill-planet-inner {
+    width: 195px;
+    transform: translate(-50%, -50%) scale(1.15);
+    box-shadow: 0 0 35px var(--planet-glow), 0 0 0 4px rgba(255, 255, 255, 0.85);
+}
+
+.skill-planet:hover .skill-name-label {
+    opacity: 1;
+    margin-left: 10px;
+}
+
+.light-mode .skill-planet:hover .skill-planet-inner {
+    box-shadow: 0 0 35px var(--planet-glow), 0 0 0 4px rgba(15, 23, 42, 0.85);
+}
+
+/* Orbit Animations for centered selector */
+@keyframes orbitPython {
+    0% { transform: translate(-50%, -50%) rotate(0deg) translateX(145px) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg) translateX(145px) rotate(-360deg); }
+}
+
+@keyframes orbitDL {
+    0% { transform: translate(-50%, -50%) rotate(180deg) translateX(145px) rotate(-180deg); }
+    100% { transform: translate(-50%, -50%) rotate(540deg) translateX(145px) rotate(-540deg); }
+}
+
+@keyframes orbitCV {
+    0% { transform: translate(-50%, -50%) rotate(90deg) translateX(215px) rotate(-90deg); }
+    100% { transform: translate(-50%, -50%) rotate(450deg) translateX(215px) rotate(-450deg); }
+}
+
+@keyframes orbitJS {
+    0% { transform: translate(-50%, -50%) rotate(270deg) translateX(215px) rotate(-270deg); }
+    100% { transform: translate(-50%, -50%) rotate(630deg) translateX(215px) rotate(-630deg); }
+}
+
+@keyframes orbitWeb {
+    0% { transform: translate(-50%, -50%) rotate(60deg) translateX(285px) rotate(-60deg); }
+    100% { transform: translate(-50%, -50%) rotate(420deg) translateX(285px) rotate(-420deg); }
+}
+
+@keyframes orbitGit {
+    0% { transform: translate(-50%, -50%) rotate(240deg) translateX(285px) rotate(-240deg); }
+    100% { transform: translate(-50%, -50%) rotate(600deg) translateX(285px) rotate(-600deg); }
+}
+
+/* Tooltips */
+.skill-planet::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%) scale(0.85);
+    background: rgba(10, 15, 30, 0.95);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--planet-glow);
+    color: #ffffff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4), 0 0 10px var(--planet-glow);
+    z-index: 100;
+}
+
+.skill-planet::before {
+    content: '';
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%) scale(0.85);
+    border-width: 6px 6px 0 6px;
+    border-style: solid;
+    border-color: rgba(10, 15, 30, 0.95) transparent transparent transparent;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 100;
+}
+
+.skill-planet:hover::after, .skill-planet:hover::before {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}
+
+.light-mode .skill-planet::after {
+    background: rgba(255, 255, 255, 0.98);
+    color: #0f172a;
+    border: 1px solid var(--planet-glow);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1), 0 0 10px var(--planet-glow);
+}
+
+.light-mode .skill-planet::before {
+    border-color: rgba(255, 255, 255, 0.98) transparent transparent transparent;
+}
+
+@media (max-width: 768px) {
+    .skills-planetarium {
+        transform: scale(0.75);
+    }
+}
+
+@media (max-width: 480px) {
+    .skills-planetarium {
+        transform: scale(0.55);
+    }
+}
+
+/* Projects Section */
+.project-filters {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3.5rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: var(--font-body);
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    color: #060814;
+    background: var(--gradient-primary);
+    border-color: transparent;
+    box-shadow: 0 5px 15px rgba(0, 242, 254, 0.3);
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+}
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.project-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.project-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: radial-gradient(circle, rgba(0,242,254,0.1) 0%, rgba(157,78,221,0.05) 100%);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-primary);
+}
+
+.project-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
+.project-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.project-link {
+    color: var(--text-secondary);
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.project-link:hover {
+    color: var(--accent-primary);
+    transform: translateY(-2px);
+}
+
+.project-link svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+.project-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.project-desc {
+    color: var(--text-secondary);
+    font-size: 0.98rem;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.project-tag {
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: var(--accent-primary);
+    background: rgba(0, 242, 254, 0.05);
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 242, 254, 0.1);
+}
+
+/* Timeline / Experience & Education */
+.journey-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.journey-col-title {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+.journey-col-title svg {
+    width: 26px;
+    height: 26px;
+    fill: var(--accent-primary);
+}
+
+.timeline-container {
+    position: relative;
+}
+
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20px;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--accent-primary), var(--accent-secondary), transparent);
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 50px;
+    margin-bottom: 4rem;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-badge {
+    position: absolute;
+    left: 20px;
+    top: 5px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--bg-base);
+    border: 3px solid var(--accent-primary);
+    box-shadow: 0 0 8px var(--accent-primary);
+    z-index: 1;
+    transform: translateX(-50%);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.timeline-item:hover .timeline-badge {
+    background: var(--bg-base);
+    border-color: var(--accent-secondary);
+    box-shadow: 0 0 15px var(--accent-secondary);
+    transform: translateX(-50%) scale(1.25);
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.timeline-title h3 {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.timeline-title h4 {
+    font-size: 0.95rem;
+    color: var(--accent-primary);
+    font-weight: 600;
+    margin-top: 0.25rem;
+}
+
+.timeline-date {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+}
+
+.timeline-body ul {
+    list-style: none;
+    color: var(--text-secondary);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.timeline-body li {
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.timeline-body li::before {
+    content: '➔';
+    position: absolute;
+    left: 0;
+    color: var(--accent-primary);
+    font-size: 0.8rem;
+}
+
+/* Contact Section */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.contact-info h3 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.contact-info p {
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    font-size: 1.05rem;
+}
+
+.contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contact-method {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.contact-method-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background: rgba(255, 75, 43, 0.04);
+    color: var(--accent-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.light-mode .contact-method-icon {
+    background: rgba(230, 57, 70, 0.05);
+}
+
+.contact-method:hover .contact-method-icon {
+    border-color: var(--accent-secondary);
+    box-shadow: 0 0 15px var(--glow-color);
+    color: var(--accent-secondary);
+    background: rgba(255, 75, 43, 0.08);
+    transform: translateY(-2px);
+}
+
+.contact-method-icon svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+}
+
+.contact-method-details h4 {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.contact-method-details a,
+.contact-method-details p {
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    margin-top: 0.25rem;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+.contact-method-details a:hover {
+    color: var(--accent-primary);
+}
+
+/* Contact Form Grid */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-control {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.light-mode .form-control {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.submit-btn-wrap {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Footer Section */
+footer {
+    padding: 4rem 0 3rem;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.footer-copy {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Scroll Animation Classes */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Skills Console Grid Responsiveness */
+.skills-side-panel {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+/* Maintain 3-column cockpit frame down to 768px by scaling elements proportionally */
+@media (max-width: 1340px) {
+    .skills-console-grid {
+        grid-template-columns: 270px 1fr 270px;
+        gap: 1.25rem;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .skills-planetarium-wrap {
+        width: 500px;
+        height: 500px;
+    }
+    
+    .skills-planetarium {
+        transform: scale(0.75);
+    }
+    
+    .skills-side-panel {
+        padding: 1.25rem;
+        min-height: 380px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .skills-console-grid {
+        grid-template-columns: 220px 1fr 220px;
+        gap: 0.75rem;
+    }
+    
+    .skills-planetarium-wrap {
+        width: 380px;
+        height: 380px;
+    }
+    
+    .skills-planetarium {
+        transform: scale(0.57);
+    }
+    
+    .skills-side-panel {
+        padding: 1rem;
+        min-height: 340px;
+        border-radius: 14px;
+    }
+    
+    /* Scale down text elements slightly to fit the narrower panels */
+    .panel-header {
+        font-size: 0.65rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .telemetry-module-title h4 {
+        font-size: 1rem;
+    }
+    
+    .desc-text {
+        font-size: 0.75rem;
+        line-height: 1.4;
+    }
+    
+    .label {
+        font-size: 0.6rem;
+    }
+    
+    .value {
+        font-size: 0.72rem;
+    }
+    
+    .telemetry-bar-wrap {
+        margin-top: 0.75rem;
+    }
+    
+    .sub-skill-rocket {
+        padding: 0.45rem 0.65rem;
+        margin-bottom: 0.45rem;
+        gap: 8px;
+    }
+    
+    .rocket-name {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Below 768px (Mobile viewports), stack panels vertically for readability */
+    .skills-console-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        justify-items: center;
+    }
+    
+    .skills-planetarium-wrap {
+        grid-column: 1;
+        grid-row: 1;
+        width: 380px;
+        height: 380px;
+    }
+    
+    .skills-planetarium {
+        transform: scale(0.57);
+    }
+    
+    .skills-telemetry {
+        grid-column: 1;
+        grid-row: 2;
+        max-width: 480px;
+    }
+    
+    .skills-launchpad {
+        grid-column: 1;
+        grid-row: 3;
+        max-width: 480px;
+    }
+}
+
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+    .hero-grid, .about-grid, .contact-grid, .journey-columns {
+        grid-template-columns: 1fr;
+        gap: 3.5rem;
+    }
+    
+    .hero-visualizer {
+        order: -1;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .skills-matrix {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 1rem 5%;
+    }
+    
+    .nav-links {
+        display: none; /* In a full mobile layout, we can toggle this or keep simple */
+    }
+    
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+    
+    .form-group-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+/* =========================================================================
+   Modern Galaxy Cards
+   ========================================================================= */
+.galaxy-card-border {
+    position: relative;
+    padding: 1.5px;
+    background: linear-gradient(135deg, var(--border-color) 0%, rgba(255, 255, 255, 0.05) 50%, var(--border-color) 100%);
+    border-radius: 24px; /* Smooth rounded corners */
+    transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    width: 100%;
+}
+
+.galaxy-card-border:hover {
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-pink) 50%, var(--accent-secondary) 100%);
+    box-shadow: 0 15px 45px rgba(124, 58, 237, 0.2), 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.galaxy-card {
+    background: rgba(10, 12, 22, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 22px;
+    padding: 2.25rem;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.light-mode .galaxy-card-border {
+    background: linear-gradient(135deg, var(--border-color) 0%, rgba(0, 0, 0, 0.04) 50%, var(--border-color) 100%);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+.light-mode .galaxy-card {
+    background: rgba(255, 255, 255, 0.85);
+}
+
+.light-mode .galaxy-card-border:hover {
+    background: var(--gradient-primary);
+}
+
+/* =========================================================================
+   Stellar Heading Orbits (Modern Space Theme)
+   ========================================================================= */
+.section-header h2 {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 1.8rem;
+    letter-spacing: 0.08em;
+}
+
+.section-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translate(-50%, 0) rotateX(80deg);
+    width: 155px;
+    height: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1.5px solid var(--accent-primary); /* Orbit ring */
+    border-radius: 50%;
+    opacity: 0.8;
+    box-shadow: 0 -2px 10px rgba(59, 130, 246, 0.2);
+    pointer-events: none;
+}
+
+.section-header h2::before {
+    content: '✦';
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    color: var(--accent-secondary);
+    font-size: 0.75rem;
+    animation: orbitStarText 8s linear infinite;
+    transform-origin: center center;
+    text-shadow: 0 0 6px var(--accent-secondary);
+    z-index: 2;
+    pointer-events: none;
+}
+
+@keyframes orbitStarText {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg) translateX(75px) rotate(0deg) scale(1.1);
+        opacity: 1;
+        z-index: 2;
+    }
+    50% {
+        transform: translate(-50%, -50%) rotate(180deg) translateX(75px) rotate(-180deg) scale(0.6);
+        opacity: 0.3;
+        z-index: -1;
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg) translateX(75px) rotate(-360deg) scale(1.1);
+        opacity: 1;
+        z-index: 2;
+    }
+}
+
+/* =========================================================================
+   Solar System & CSS Rocket Visualizer
+   ========================================================================= */
+.solar-system {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+}
+
+/* Glowing Sun center */
+.solar-sun {
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fffef0 0%, #ffdf00 30%, #ffa200 65%, #ff4b2b 100%);
+    box-shadow: 
+        0 0 35px rgba(255, 162, 0, 0.6), 
+        0 0 70px rgba(255, 75, 43, 0.4), 
+        inset -5px -5px 15px rgba(0,0,0,0.4);
+    z-index: 5;
+    animation: pulseSun 4s ease-in-out infinite alternate;
+}
+
+@keyframes pulseSun {
+    0% { transform: scale(0.95); box-shadow: 0 0 30px rgba(255, 162, 0, 0.5), 0 0 60px rgba(255, 75, 43, 0.3); }
+    100% { transform: scale(1.05); box-shadow: 0 0 45px rgba(255, 162, 0, 0.7), 0 0 90px rgba(255, 75, 43, 0.5); }
+}
+
+/* Planet Orbit Paths */
+.planet-orbit {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transform: rotateX(72deg) rotateY(-15deg);
+    transform-style: preserve-3d;
+    pointer-events: none;
+}
+
+.orbit-1 { width: 110px; height: 110px; z-index: 2; }
+.orbit-2 { width: 170px; height: 170px; z-index: 3; }
+.orbit-3 { width: 240px; height: 240px; z-index: 4; }
+.orbit-4 { width: 310px; height: 310px; z-index: 5; }
+
+/* The Planets themselves */
+.planet {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: center center;
+}
+
+.planet-sphere {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+}
+
+/* Planet 1: Mercury (Inner Grey Rocky) */
+.planet.p-mercury {
+    width: 14px;
+    height: 14px;
+    animation: orbitMercury 6s linear infinite;
+}
+
+.planet.p-mercury .planet-sphere {
+    background: radial-gradient(circle at 30% 30%, #e5e5e5 0%, #b0b0b0 25%, #606060 65%, #1a1a1a 100%);
+    box-shadow: inset -3px -3px 5px rgba(0,0,0,0.9), 0 0 6px rgba(255,255,255,0.15);
+}
+
+/* Planet 2: Venus (Yellowish-cream acidic atmosphere) */
+.planet.p-venus {
+    width: 18px;
+    height: 18px;
+    animation: orbitVenus 10s linear infinite;
+}
+
+.planet.p-venus .planet-sphere {
+    background: radial-gradient(circle at 30% 30%, #fff9c4 0%, #fdd835 25%, #e65100 70%, #3e0b00 100%);
+    box-shadow: inset -4px -4px 7px rgba(0,0,0,0.95), 0 0 10px rgba(253, 216, 53, 0.35);
+}
+
+/* Planet 3: Earth Container (Blue-Green continents and clouds + Moon) */
+.p-earth-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    transform-style: preserve-3d;
+    animation: orbitEarth 16s linear infinite;
+}
+
+.planet.p-earth {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.planet.p-earth .planet-sphere {
+    background: radial-gradient(circle at 30% 30%, #81c784 0%, #26c6da 15%, #1e88e5 45%, #0d47a1 75%, #00133a 100%);
+    box-shadow: inset -4px -4px 8px rgba(0,0,0,0.95), 0 0 16px rgba(30, 136, 229, 0.7), 0 0 4px rgba(255,255,255,0.4);
+}
+
+/* Nested Moon Orbit */
+.earth-moon-orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 0.5px dashed rgba(255, 255, 255, 0.15);
+    transform: translate(-50%, -50%) rotateX(70deg) rotateY(-10deg);
+    transform-style: preserve-3d;
+    pointer-events: none;
+}
+
+.earth-moon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    animation: orbitMoon 3s linear infinite;
+}
+
+.earth-moon .planet-sphere {
+    background: radial-gradient(circle at 30% 30%, #ffffff 0%, #d6d6d6 30%, #707070 75%, #222222 100%);
+    box-shadow: inset -1px -1px 2px rgba(0,0,0,0.9), 0 0 4px rgba(255, 255, 255, 0.4);
+}
+
+/* Planet 4: Mars (Red-orange rusty) */
+.planet.p-mars {
+    width: 17px;
+    height: 17px;
+    animation: orbitMars 22s linear infinite;
+}
+
+.planet.p-mars .planet-sphere {
+    background: radial-gradient(circle at 30% 30%, #ff8a65 0%, #d84315 45%, #5d1100 85%, #1b0000 100%);
+    box-shadow: inset -3px -3px 6px rgba(0,0,0,0.95), 0 0 10px rgba(216, 67, 21, 0.5);
+}
+
+@keyframes orbitMercury {
+    0% { transform: translate(-50%, -50%) rotate(0deg) translateX(55px) rotate(0deg) rotateX(-72deg) rotateY(15deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg) translateX(55px) rotate(-360deg) rotateX(-72deg) rotateY(15deg); }
+}
+
+@keyframes orbitVenus {
+    0% { transform: translate(-50%, -50%) rotate(0deg) translateX(85px) rotate(0deg) rotateX(-72deg) rotateY(15deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg) translateX(85px) rotate(-360deg) rotateX(-72deg) rotateY(15deg); }
+}
+
+@keyframes orbitEarth {
+    0% { transform: translate(-50%, -50%) rotate(0deg) translateX(120px) rotate(0deg) rotateX(-72deg) rotateY(15deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg) translateX(120px) rotate(-360deg) rotateX(-72deg) rotateY(15deg); }
+}
+
+@keyframes orbitMoon {
+    0% { transform: translate(-50%, -50%) rotate(0deg) translateX(22px) rotate(0deg) rotateX(-70deg) rotateY(10deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg) translateX(22px) rotate(-360deg) rotateX(-70deg) rotateY(10deg); }
+}
+
+@keyframes orbitMars {
+    0% { transform: translate(-50%, -50%) rotate(0deg) translateX(155px) rotate(0deg) rotateX(-72deg) rotateY(15deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg) translateX(155px) rotate(-360deg) rotateX(-72deg) rotateY(15deg); }
+}
+
+/* =========================================================================
+   CSS Rocket Ship (Floating Astronautical Object)
+   ========================================================================= */
+.rocket-container {
+    position: absolute;
+    width: 70px;
+    height: 120px;
+    z-index: 10;
+    pointer-events: auto;
+    cursor: pointer;
+    transform: translate(90px, -60px) rotate(15deg);
+    animation: rocketFloat 5s ease-in-out infinite;
+    transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@keyframes rocketFloat {
+    0%, 100% { transform: translate(90px, -60px) rotate(15deg) translateY(0); }
+    50% { transform: translate(90px, -60px) rotate(13deg) translateY(-10px); }
+}
+
+/* Thrust/Launch hover state! */
+.rocket-container:hover {
+    transform: translate(110px, -110px) rotate(25deg) scale(1.12);
+}
+
+.realistic-rocket-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.engine-flame {
+    animation: flameScale 0.08s ease-in-out infinite alternate;
+    transform-origin: 32px 78px;
+}
+
+@keyframes flameScale {
+    0% { transform: scale(0.92); filter: brightness(0.9); }
+    100% { transform: scale(1.08); filter: brightness(1.1); }
+}
+
+/* Tilted star diamond timeline badges */
+.timeline-badge {
+    position: absolute;
+    left: 20px;
+    top: 5px;
+    width: 16px;
+    height: 16px;
+    background: #020308;
+    border: 3px solid var(--accent-primary);
+    box-shadow: 0 0 10px var(--accent-primary);
+    z-index: 2;
+    transform: translateX(-50%) rotate(45deg);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.timeline-item:hover .timeline-badge {
+    background: var(--accent-secondary);
+    border-color: var(--accent-secondary);
+    box-shadow: 0 0 18px var(--accent-secondary);
+    transform: translateX(-50%) rotate(225deg) scale(1.15);
+}
+
+/* =========================================================================
+   Interactive Laser Scan effect on Project Cards
+   ========================================================================= */
+.galaxy-card::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-pink), var(--accent-secondary), var(--accent-pink), transparent);
+    opacity: 0;
+    z-index: 15;
+    pointer-events: none;
+}
+
+.galaxy-card-border:hover .galaxy-card::before {
+    opacity: 1;
+    animation: laserScan 2.5s linear infinite;
+}
+
+@keyframes laserScan {
+    0% { top: 0%; opacity: 0; }
+    8% { opacity: 1; }
+    92% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+}
+
+/* =========================================================================
+   Cosmic Signal Transmitter Form & Oscilloscope Wave
+   ========================================================================= */
+.contact-oscilloscope-wrap {
+    position: relative;
+    width: 100%;
+    height: 70px;
+    background: rgba(1, 2, 7, 0.6);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-oscilloscope {
+    width: 100%;
+    height: 100%;
+}
+
+.contact-oscilloscope path {
+    fill: none;
+    stroke: var(--accent-pink);
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 4px var(--accent-pink));
+}
+
+.contact-oscilloscope-label {
+    position: absolute;
+    top: 6px;
+    left: 12px;
+    font-family: monospace;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.light-mode .contact-oscilloscope-wrap {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* =========================================================================
+   Gliding Rocket Timeline Track & Rocket Physics
+   ========================================================================= */
+.timeline-rocket {
+    position: absolute;
+    left: 20px;
+    top: 0;
+    width: 20px;
+    height: 32px;
+    transform: translate(-50%, -50%) rotate(180deg); /* Face downward */
+    z-index: 12;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: top 0.15s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.timeline-rocket-body {
+    width: 8px;
+    height: 18px;
+    background: linear-gradient(to right, #cbd5e1, #94a3b8);
+    border-radius: 50% 50% 2px 2px;
+    position: relative;
+    box-shadow: 0 0 6px rgba(255,255,255,0.3);
+}
+
+.timeline-rocket-body::before { /* Nose cone */
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: var(--accent-pink);
+    border-radius: 50% 50% 0 0;
+}
+
+.timeline-rocket-fins {
+    position: absolute;
+    bottom: 2px;
+    width: 14px;
+    height: 6px;
+    background: var(--accent-pink);
+    z-index: -1;
+    border-radius: 2px;
+}
+
+.timeline-rocket-flame {
+    width: 4px;
+    height: 10px;
+    background: linear-gradient(to bottom, #ff8c00, #ff4b2b, rgba(255, 75, 43, 0));
+    border-radius: 0 0 50% 50%;
+    animation: timelineFlame 0.12s infinite alternate;
+}
+
+@keyframes timelineFlame {
+    0% { transform: scaleY(0.7); }
+    100% { transform: scaleY(1.3); }
+}
+
+/* =========================================================================
+   Cosmic Engine backdrop orbits for Skills Grid
+   ========================================================================= */
+@media (max-width: 480px) {
+    .skills-planetarium {
+        transform: scale(0.85);
+    }
+}
+
+
+
+

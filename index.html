@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pujan Patel | AI/ML Developer & Portfolio</title>
+    <meta name="description" content="Portfolio of Pujan Patel, AI/ML Developer Intern specializing in Computer Vision, Deep Learning, and Python-based pipelines. Explore interactive 3D widgets, projects, and achievements.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+
+    <!-- Neural Grid Interactive Background -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Floating Navigation Bar -->
+    <header>
+        <nav>
+            <a href="#" class="logo">
+                <span>COSMOS</span><span class="logo-dot"></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about" class="active">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme">
+                    <!-- Dynamic SVG injected by JS -->
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-grid">
+                <div class="hero-content reveal">
+                    <h3>[ HELLO_WORLD ]</h3>
+                    <h1>I am <span>Pujan Patel</span></h1>
+                    <div class="hero-typing">
+                        <span id="typing-text"></span><span class="typed-cursor"></span>
+                    </div>
+                    <p class="hero-desc">
+                        I am an <strong>AI/ML Engineer</strong> specializing in <strong>Computer Vision & Deep Learning</strong>. Currently leveraging my expertise as an <strong>AI/ML Developer Intern</strong> to design high-performance vision architectures, deploy optimized object detection systems (YOLO, OpenCV), and architect scalable data pipelines.
+                    </p>
+                    <div class="hero-btns">
+                        <a href="#contact" class="btn btn-primary">Ping Me</a>
+                        <a href="Resume_PujanPatel.pdf" download class="btn btn-secondary">Download Resume</a>
+                    </div>
+                    <div class="hero-socials">
+                        <span>Connect</span>
+                        <a href="https://www.linkedin.com/in/patelpujan64/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.8v8.37h2.8v-4.87c0-.25.05-.5.12-.68a1.14 1.14 0 0 1 1-.77c.76 0 1 .56 1 1.39v4.93h2.8M6.5 8.37a1.37 1.37 0 1 0 0-2.75 1.37 1.37 0 0 0 0 2.75M8 18.5V10.13H5.2v8.37H8z"/></svg>
+                        </a>
+                        <a href="https://github.com/Pujan64" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visualizer reveal">
+                    <div class="visualizer-container">
+                        <div class="visualizer-ring ring-1"></div>
+                        <div class="visualizer-ring ring-2"></div>
+                        <div class="visualizer-ring ring-3"></div>
+                        <div class="solar-system">
+                            <div class="solar-sun"></div>
+                            <div class="planet-orbit orbit-1">
+                                <div class="planet p-mercury">
+                                    <div class="planet-sphere"></div>
+                                </div>
+                            </div>
+                            <div class="planet-orbit orbit-2">
+                                <div class="planet p-venus">
+                                    <div class="planet-sphere"></div>
+                                </div>
+                            </div>
+                            <div class="planet-orbit orbit-3">
+                                <div class="planet-container p-earth-container">
+                                    <div class="planet p-earth">
+                                        <div class="planet-sphere"></div>
+                                    </div>
+                                    <div class="earth-moon-orbit">
+                                        <div class="earth-moon">
+                                            <div class="planet-sphere"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="planet-orbit orbit-4">
+                                <div class="planet p-mars">
+                                    <div class="planet-sphere"></div>
+                                </div>
+                            </div>
+                            <div class="rocket-container">
+                                <svg viewBox="0 0 64 120" class="realistic-rocket-svg">
+                                    <defs>
+                                        <linearGradient id="rocket-body-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" stop-color="#ffffff" />
+                                            <stop offset="40%" stop-color="#cbd5e1" />
+                                            <stop offset="70%" stop-color="#94a3b8" />
+                                            <stop offset="100%" stop-color="#475569" />
+                                        </linearGradient>
+                                        <linearGradient id="rocket-nose-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" stop-color="#ff3b30" />
+                                            <stop offset="50%" stop-color="#ff2d55" />
+                                            <stop offset="100%" stop-color="#8e001c" />
+                                        </linearGradient>
+                                        <linearGradient id="rocket-wing-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" stop-color="#ff3b30" />
+                                            <stop offset="100%" stop-color="#a0102a" />
+                                        </linearGradient>
+                                        <linearGradient id="rocket-window-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stop-color="#00f2fe" />
+                                            <stop offset="100%" stop-color="#4facfe" />
+                                        </linearGradient>
+                                        <linearGradient id="fire-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" stop-color="#ffeb3b" />
+                                            <stop offset="25%" stop-color="#ff9800" />
+                                            <stop offset="50%" stop-color="#f44336" />
+                                            <stop offset="100%" stop-color="rgba(244, 67, 54, 0)" />
+                                        </linearGradient>
+                                        <filter id="glow-filter" x="-20%" y="-20%" width="140%" height="140%">
+                                            <feGaussianBlur stdDeviation="3" result="blur" />
+                                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                                        </filter>
+                                    </defs>
+                                    <path class="engine-flame" d="M32,78 Q22,95 24,115 Q32,122 40,115 Q42,95 32,78 Z" fill="url(#fire-grad)" filter="url(#glow-filter)" />
+                                    <path class="engine-flame-inner" d="M32,78 Q26,88 28,105 Q32,108 36,105 Q38,88 32,78 Z" fill="#ffffff" filter="url(#glow-filter)" />
+                                    <path d="M20,60 L2,80 Q0,84 4,84 L18,76 Z" fill="url(#rocket-wing-grad)" />
+                                    <path d="M44,60 L62,80 Q64,84 60,84 L46,76 Z" fill="url(#rocket-wing-grad)" />
+                                    <path d="M32,76 L35,88 L29,88 Z" fill="#8e001c" />
+                                    <path d="M32,10 Q20,30 18,52 L18,76 Q18,78 20,78 L44,78 Q46,78 46,76 L46,52 Q44,30 32,10 Z" fill="url(#rocket-body-grad)" />
+                                    <path d="M32,10 Q24,24 21,34 L43,34 Q40,24 32,10 Z" fill="url(#rocket-nose-grad)" />
+                                    <rect x="25" y="76" width="14" height="4" rx="1" fill="#1e293b" />
+                                    <circle cx="32" cy="48" r="8" fill="url(#rocket-window-grad)" stroke="#1e293b" stroke-width="2" />
+                                    <circle cx="32" cy="48" r="6" fill="none" stroke="#ffffff" stroke-width="0.75" stroke-dasharray="10 5" opacity="0.6" />
+                                    <path d="M19,55 L45,55" stroke="#475569" stroke-width="1" opacity="0.4" />
+                                    <path d="M19,65 L45,65" stroke="#475569" stroke-width="1" opacity="0.4" />
+                                    <path d="M32,34 L32,76" stroke="#475569" stroke-width="1" opacity="0.2" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About & FocusVision Interactive Dashboard Widget -->
+        <section id="about">
+            <div class="section-header reveal">
+                <h2>About <span>Me</span></h2>
+                <p>Developing intelligence inside code. Balancing computational efficiency with design aesthetics.</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-details reveal">
+                    <p>
+                        I am an <strong>AI/ML Engineer</strong> pursuing a Bachelor of Technology in Computer Engineering at <strong>Silver Oak University</strong>, with a specialization in <strong>Artificial Intelligence and Machine Learning</strong> (<strong>CGPA: 9.22</strong>). My expertise lies in designing robust <strong>Computer Vision frameworks</strong>, training <strong>Deep Learning systems</strong>, and building optimized machine learning pipelines.
+                    </p>
+                    <p>
+                        As an <strong>AI/ML Developer Intern</strong> at <strong>Nxon AI Pvt. Ltd.</strong>, I specialize in optimizing high-speed <strong>object detection pipelines</strong> using advanced <strong>YOLO models</strong> and <strong>OpenCV</strong> libraries. I architect clean, modular, and reusable Python-based architectures to power real-time, low-latency video inference.
+                    </p>
+                    <p>
+                        I am passionate about bridging the gap between sophisticated backend AI logic and intuitive user experiences. By designing solutions to complex problems—such as <strong>real-time distraction monitoring</strong> and <strong>automated license plate recognition (ANPR)</strong>—I deliver production-grade applications that combine algorithmic precision with responsive, user-centric interfaces.
+                    </p>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-num">9.22</div>
+                            <div class="stat-label">CGPA (B.Tech)</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-num">5+</div>
+                            <div class="stat-label">AI Projects</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-num">2</div>
+                            <div class="stat-label">Internships</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive FocusVision Simulator Widget -->
+                <div class="focus-widget-wrap tilt-card-wrap reveal">
+                    <div class="galaxy-card-border">
+                        <div class="galaxy-card focus-widget tilt-card" style="padding: 0;">
+                            <div class="focus-header">
+                            <div class="focus-dots">
+                                <span class="focus-dot red"></span>
+                                <span class="focus-dot yellow"></span>
+                                <span class="focus-dot green"></span>
+                            </div>
+                            <div class="focus-title">FOCUSVISION_RADAR_MOCK.PY</div>
+                        </div>
+                        <div class="focus-body tilt-inner">
+                            <div id="focus-radar" class="focus-radar-container">
+                                <div class="focus-radar-sweep"></div>
+                                <div class="radar-grid"></div>
+                                <div id="focus-reticle" class="focus-reticle"></div>
+                            </div>
+                            <div class="focus-console">
+                                <div class="console-line"><span>[STATE]</span> <strong id="status-val">STANDBY (NO_FACE)</strong></div>
+                                <div class="console-line"><span>[COORDS]</span> X: <strong id="coord-x-val">---</strong>, Y: <strong id="coord-y-val">---</strong></div>
+                                <div class="console-line"><span>[FOCUS_INDEX]</span> <strong id="focus-score-val">0%</strong></div>
+                                <div class="console-line"><span>[INFERENCE]</span> <strong id="inference-val">---ms</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <div class="section-header reveal">
+                <h2>Technical <span>Skills</span></h2>
+                <p>A compilation of languages, tools, and theoretical framework knowledge I use regularly.</p>
+            </div>
+            <div class="skills-console-wrap reveal">
+                <div class="skills-console-grid">
+                    
+                    <!-- Left Side: Mission Control Telemetry -->
+                    <div class="skills-side-panel skills-telemetry">
+                        <div class="panel-border">
+                            <div class="panel-header">
+                                <span class="panel-dot"></span>
+                                <span>MISSION TELEMETRY</span>
+                            </div>
+                            <div class="panel-body">
+                                <div class="telemetry-module-header">
+                                    <div id="tel-logo" class="tel-logo"></div>
+                                    <div class="telemetry-module-title">
+                                        <span class="label">MODULE:</span>
+                                        <h4 id="tel-title" class="value">Python Engine</h4>
+                                    </div>
+                                </div>
+                                <div class="telemetry-item">
+                                    <span class="label">SYSTEM STATUS:</span>
+                                    <span id="tel-status" class="value status-ok">OPTIMAL</span>
+                                </div>
+                                <div class="telemetry-desc-wrap">
+                                    <span class="label">TELEMETRY RELEASES:</span>
+                                    <p id="tel-desc" class="desc-text">Core Python developer engine for high-throughput image processing, analytics, and deep learning pipelines.</p>
+                                </div>
+                                <div class="telemetry-bar-wrap">
+                                    <div class="telemetry-bar-label">
+                                        <span class="label">MODULE INTEGRITY</span>
+                                        <span id="tel-bar-pct" class="label">95%</span>
+                                    </div>
+                                    <div class="telemetry-bar">
+                                        <div id="tel-bar" class="telemetry-bar-inner" style="width: 95%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Center: Planetarium Core -->
+                    <div class="skills-planetarium-wrap">
+                        <div class="skills-planetarium">
+                            <!-- Central main yellow Sun -->
+                            <div class="skills-sun" id="skills-sun"></div>
+                            
+                            <!-- Dashed Orbits -->
+                            <div class="skills-orbit orbit-inner"></div>
+                            <div class="skills-orbit orbit-middle"></div>
+                            <div class="skills-orbit orbit-outer"></div>
+                            
+                            <!-- Orbiting Skill Planets -->
+                            <div class="skill-planet skill-python active" data-skill="python" data-tooltip="Python Core Engine">
+                                <div class="skill-planet-inner">
+                                    <div class="skill-icon-wrap">
+                                        <svg viewBox="0 0 24 24" class="skill-svg-icon">
+                                            <path fill="#3776AB" d="M14.25.18c.9 0 1.66.73 1.66 1.63v2.85h-2.92c-.88 0-1.6.71-1.6 1.6v1.45H8.38c-.89 0-1.6.72-1.6 1.6v2.9h-2.9C2.97 12.21 2.25 11.48 2.25 10.58V8.34c0-.9.73-1.63 1.63-1.63H6.8V3.8c0-.9.72-1.62 1.62-1.62h2.89C11.31.75 12.04.18 12.94.18h1.31zm.54 1.35a.54.54 0 1 0 0 1.08.54.54 0 0 0 0-1.08z"/>
+                                            <path fill="#FFD343" d="M9.75 23.82c-.9 0-1.66-.73-1.66-1.63v-2.85h2.92c.88 0 1.6-.71 1.6-1.6v-1.45h3.01c.89 0 1.6-.72 1.6-1.6v-2.9h-2.9C2.97 12.21 2.25 11.48 2.25 10.58V8.34c0-.9.73-1.63 1.63-1.63H6.8V3.8c0-.9.72-1.62 1.62-1.62h2.89C11.31.75 12.04.18 12.94.18h1.31zm.54 1.35a.54.54 0 1 0 0 1.08.54.54 0 0 0 0-1.08z"/>
+                                        </svg>
+                                    </div>
+                                    <span class="skill-name-label">Python</span>
+                                </div>
+                            </div>
+                            <div class="skill-planet skill-dl" data-skill="dl" data-tooltip="Deep Learning">
+                                <div class="skill-planet-inner">
+                                    <div class="skill-icon-wrap">
+                                        <svg viewBox="0 0 24 24" class="skill-svg-icon">
+                                            <path fill="#EE4C2C" d="M12 0L1.6 6v12L12 24l10.4-6V6L12 0zm0 18.5c-3.6 0-6.5-2.9-6.5-6.5S8.4 5.5 12 5.5s6.5 2.9 6.5 6.5-2.9 6.5-6.5 6.5z"/>
+                                            <path fill="#EE4C2C" d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/>
+                                        </svg>
+                                    </div>
+                                    <span class="skill-name-label">Deep Learning</span>
+                                </div>
+                            </div>
+                            <div class="skill-planet skill-cv" data-skill="cv" data-tooltip="Computer Vision">
+                                <div class="skill-planet-inner">
+                                    <div class="skill-icon-wrap">
+                                        <svg viewBox="0 0 24 24" class="skill-svg-icon">
+                                            <circle cx="12" cy="7" r="4.5" fill="none" stroke="#E11E26" stroke-width="2.5" />
+                                            <circle cx="7.5" cy="15" r="4.5" fill="none" stroke="#009E47" stroke-width="2.5" />
+                                            <circle cx="16.5" cy="15" r="4.5" fill="none" stroke="#007CC0" stroke-width="2.5" />
+                                        </svg>
+                                    </div>
+                                    <span class="skill-name-label">Computer Vision</span>
+                                </div>
+                            </div>
+                            <div class="skill-planet skill-js" data-skill="js" data-tooltip="JavaScript Stack">
+                                <div class="skill-planet-inner">
+                                    <div class="skill-icon-wrap">
+                                        <svg viewBox="0 0 24 24" class="skill-svg-icon">
+                                            <rect width="24" height="24" fill="#F7DF1E" rx="3" />
+                                            <path fill="#000000" d="M18.8 18.2c-.3.5-.8.9-1.5.9-.7 0-1.2-.4-1.5-.9-.2-.3-.3-.7-.3-1.2h1.6c0 .3.1.5.2.7s.3.2.5.2c.2 0 .4-.1.5-.2s.2-.3.2-.5v-4.5h1.7v4.5c0 .7-.3 1.2-.9 1.5zm-5.3-2.1c-.2.5-.5.9-.9 1.2s-1 .4-1.6.4c-1.1 0-1.9-.6-2.2-1.7h1.7c.2.4.5.6.9.6.4 0 .7-.2.8-.5s.2-.6.2-.9c0-.4-.1-.7-.3-.8s-.6-.3-1.1-.5c-.7-.2-1.2-.5-1.5-.8s-.5-.8-.5-1.4c0-.6.2-1.1.7-1.4s1.1-.5 1.8-.5c.8 0 1.4.2 1.8.6s.6 1 .7 1.7H12c-.1-.3-.3-.6-.6-.7s-.6-.2-.8-.2c-.3 0-.5.1-.6.2s-.2.3-.2.5c0 .2.1.4.3.5.2.1.5.2.9.4.7.2 1.2.5 1.5.9s.4.9.4 1.5c.1.4 0 .9-.2 1.3z"/>
+                                        </svg>
+                                    </div>
+                                    <span class="skill-name-label">JavaScript</span>
+                                </div>
+                            </div>
+                            <div class="skill-planet skill-web" data-skill="web" data-tooltip="Full Stack Core">
+                                <div class="skill-planet-inner">
+                                    <div class="skill-icon-wrap">
+                                        <svg viewBox="0 0 24 24" class="skill-svg-icon" fill="none" stroke="#00d8ff" stroke-width="1.5">
+                                            <ellipse cx="12" cy="12" rx="11" ry="4.2" transform="rotate(30,12,12)"/>
+                                            <ellipse cx="12" cy="12" rx="11" ry="4.2" transform="rotate(90,12,12)"/>
+                                            <ellipse cx="12" cy="12" rx="11" ry="4.2" transform="rotate(150,12,12)"/>
+                                            <circle cx="12" cy="12" r="1.8" fill="#00d8ff"/>
+                                        </svg>
+                                    </div>
+                                    <span class="skill-name-label">Full Stack</span>
+                                </div>
+                            </div>
+                            <div class="skill-planet skill-git" data-skill="git" data-tooltip="Engineering Tools">
+                                <div class="skill-planet-inner">
+                                    <div class="skill-icon-wrap">
+                                        <svg viewBox="0 0 24 24" class="skill-svg-icon">
+                                            <path fill="#F05032" d="M23.3 10.9L13.1.7c-.9-.9-2.5-.9-3.4 0L7.9 2.5l2.8 2.8c.8-.3 1.8-.1 2.4.6.6.6.8 1.5.5 2.3l2.8 2.8c.8-.3 1.7-.1 2.3.5.9.9.9 2.5 0 3.4s-2.5.9-3.4 0c-.6-.6-.8-1.5-.5-2.3L12 9.8c-.3.3-.7.5-1.1.5v5.8c.3.2.5.5.6.8.9.9.9 2.5 0 3.4s-2.5.9-3.4 0c-.9-.9-.9-2.5 0-3.4.3-.3.7-.5 1.1-.6v-5.8c-.4-.1-.8-.3-1.1-.6-.6-.6-.8-1.5-.5-2.3L4.9 5.3 1.1 9.1c-.9.9-.9 2.5 0 3.4l10.2 10.2c.9.9 2.5.9 3.4 0l8.6-8.6c.9-.7.9-2.3 0-3.2z"/>
+                                        </svg>
+                                    </div>
+                                    <span class="skill-name-label">Git & Tools</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: Rocket Launch Pad -->
+                    <div class="skills-side-panel skills-launchpad">
+                        <div class="panel-border">
+                            <div class="panel-header">
+                                <span class="panel-dot"></span>
+                                <span>LAUNCH PAD MODULES</span>
+                            </div>
+                            <div id="rocket-launch-area" class="panel-body rocket-container-list">
+                                <!-- Injected dynamically by JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <div class="section-header reveal">
+                <h2>Featured <span>Projects</span></h2>
+                <p>Explore some of the solutions I've designed and built recently.</p>
+            </div>
+
+            <!-- Filters -->
+            <div class="project-filters reveal">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="ai-ml">AI / ML</button>
+                <button class="filter-btn" data-filter="web">Web Apps</button>
+            </div>
+
+            <div class="projects-grid">
+                <!-- Project 1: FocusVision -->
+                <div class="project-item reveal" data-category="ai-ml">
+                    <div class="galaxy-card-border tilt-card-wrap">
+                        <div class="galaxy-card project-card tilt-card">
+                            <div class="tilt-inner">
+                                <div class="project-card-header">
+                                    <div class="project-icon">
+                                        <svg viewBox="0 0 24 24"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5 5 5 0 0 1 5-5 5 5 0 0 1 5 5 5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5z"/></svg>
+                                    </div>
+                                    <div class="project-links">
+                                        <a href="https://github.com/Pujan64" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="GitHub Repository">
+                                            <svg viewBox="0 0 24 24"><path d="M12 2.24c-5.38 0-9.75 4.37-9.75 9.75 0 4.3 2.79 7.95 6.66 9.24.49.09.67-.21.67-.47v-1.65c-2.71.59-3.29-1.31-3.29-1.31-.44-1.12-1.08-1.42-1.08-1.42-.89-.61.07-.6.07-.6 1 .07 1.51 1.02 1.51 1.02.87 1.49 2.29 1.06 2.85.81.09-.63.34-1.06.62-1.31-2.16-.24-4.43-1.08-4.43-4.81 0-1.06.38-1.93 1-2.62-.1-.25-.43-1.24.1-2.58 0 0 .82-.26 2.68 1 .78-.22 1.62-.32 2.45-.32.83 0 1.67.1 2.45.32 1.86-1.26 2.68-1 2.68-1 .53 1.34.2 2.33.1 2.58.62.69 1 1.56 1 2.62 0 3.74-2.28 4.57-4.45 4.81.35.3.66.9.66 1.81V19.8c0 .26.18.57.68.47 3.87-1.29 6.66-4.94 6.66-9.24 0-5.38-4.37-9.75-9.75-9.75z"/></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                                <h3 class="project-title">FocusVision — AI Tracker</h3>
+                                <p class="project-desc">
+                                    Built a real-time focus detection system using face and eye tracking algorithms. Implemented distraction and absence detection loops with a live status interface.
+                                </p>
+                                <div class="project-tags">
+                                    <span class="project-tag">Python</span>
+                                    <span class="project-tag">OpenCV</span>
+                                    <span class="project-tag">TensorFlow</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: ANPR System -->
+                <div class="project-item reveal" data-category="ai-ml">
+                    <div class="galaxy-card-border tilt-card-wrap">
+                        <div class="galaxy-card project-card tilt-card">
+                            <div class="tilt-inner">
+                                <div class="project-card-header">
+                                    <div class="project-icon">
+                                        <svg viewBox="0 0 24 24"><path d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm1 10h3l-4-4-4 4h3v4h2v-4z"/></svg>
+                                    </div>
+                                    <div class="project-links">
+                                        <a href="https://github.com/Pujan64" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="GitHub Repository">
+                                            <svg viewBox="0 0 24 24"><path d="M12 2.24c-5.38 0-9.75 4.37-9.75 9.75 0 4.3 2.79 7.95 6.66 9.24.49.09.67-.21.67-.47v-1.65c-2.71.59-3.29-1.31-3.29-1.31-.44-1.12-1.08-1.42-1.08-1.42-.89-.61.07-.6.07-.6 1 .07 1.51 1.02 1.51 1.02.87 1.49 2.29 1.06 2.85.81.09-.63.34-1.06.62-1.31-2.16-.24-4.43-1.08-4.43-4.81 0-1.06.38-1.93 1-2.62-.1-.25-.43-1.24.1-2.58 0 0 .82-.26 2.68 1 .78-.22 1.62-.32 2.45-.32.83 0 1.67.1 2.45.32 1.86-1.26 2.68-1 2.68-1 .53 1.34.2 2.33.1 2.58.62.69 1 1.56 1 2.62 0 3.74-2.28 4.57-4.45 4.81.35.3.66.9.66 1.81V19.8c0 .26.18.57.68.47 3.87-1.29 6.66-4.94 6.66-9.24 0-5.38-4.37-9.75-9.75-9.75z"/></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                                <h3 class="project-title">ANPR — Number Plate Recognition</h3>
+                                <p class="project-desc">
+                                    Developed an end-to-end Automatic Number Plate Recognition system. Localizes vehicle plates in streams using YOLOv5, preprocesses images with OpenCV, and extracts license characters using OCR engines.
+                                </p>
+                                <div class="project-tags">
+                                    <span class="project-tag">YOLOv5</span>
+                                    <span class="project-tag">OpenCV</span>
+                                    <span class="project-tag">PaddleOCR</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Expense Tracker -->
+                <div class="project-item reveal" data-category="web">
+                    <div class="galaxy-card-border tilt-card-wrap">
+                        <div class="galaxy-card project-card tilt-card">
+                            <div class="tilt-inner">
+                                <div class="project-card-header">
+                                    <div class="project-icon">
+                                        <svg viewBox="0 0 24 24"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                                    </div>
+                                    <div class="project-links">
+                                        <a href="https://github.com/Pujan64" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="GitHub Repository">
+                                            <svg viewBox="0 0 24 24"><path d="M12 2.24c-5.38 0-9.75 4.37-9.75 9.75 0 4.3 2.79 7.95 6.66 9.24.49.09.67-.21.67-.47v-1.65c-2.71.59-3.29-1.31-3.29-1.31-.44-1.12-1.08-1.42-1.08-1.42-.89-.61.07-.6.07-.6 1 .07 1.51 1.02 1.51 1.02.87 1.49 2.29 1.06 2.85.81.09-.63.34-1.06.62-1.31-2.16-.24-4.43-1.08-4.43-4.81 0-1.06.38-1.93 1-2.62-.1-.25-.43-1.24.1-2.58 0 0 .82-.26 2.68 1 .78-.22 1.62-.32 2.45-.32.83 0 1.67.1 2.45.32 1.86-1.26 2.68-1 2.68-1 .53 1.34.2 2.33.1 2.58.62.69 1 1.56 1 2.62 0 3.74-2.28 4.57-4.45 4.81.35.3.66.9.66 1.81V19.8c0 .26.18.57.68.47 3.87-1.29 6.66-4.94 6.66-9.24 0-5.38-4.37-9.75-9.75-9.75z"/></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                                <h3 class="project-title">Expense Tracker</h3>
+                                <p class="project-desc">
+                                    Developed a full-stack dashboard tool containing user validation mechanisms, budget sorting layouts, and dynamic visualizations for financial statistics.
+                                </p>
+                                <div class="project-tags">
+                                    <span class="project-tag">React.js</span>
+                                    <span class="project-tag">Node.js</span>
+                                    <span class="project-tag">MongoDB</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Python Mini Projects -->
+                <div class="project-item reveal" data-category="ai-ml">
+                    <div class="galaxy-card-border tilt-card-wrap">
+                        <div class="galaxy-card project-card tilt-card">
+                            <div class="tilt-inner">
+                                <div class="project-card-header">
+                                    <div class="project-icon">
+                                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m-4 6h-4v2h4v2h-4v2h4v2H9V7h6v2z"/></svg>
+                                    </div>
+                                    <div class="project-links">
+                                        <a href="https://github.com/Pujan64" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="GitHub Repository">
+                                            <svg viewBox="0 0 24 24"><path d="M12 2.24c-5.38 0-9.75 4.37-9.75 9.75 0 4.3 2.79 7.95 6.66 9.24.49.09.67-.21.67-.47v-1.65c-2.71.59-3.29-1.31-3.29-1.31-.44-1.12-1.08-1.42-1.08-1.42-.89-.61.07-.6.07-.6 1 .07 1.51 1.02 1.51 1.02.87 1.49 2.29 1.06 2.85.81.09-.63.34-1.06.62-1.31-2.16-.24-4.43-1.08-4.43-4.81 0-1.06.38-1.93 1-2.62-.1-.25-.43-1.24.1-2.58 0 0 .82-.26 2.68 1 .78-.22 1.62-.32 2.45-.32.83 0 1.67.1 2.45.32 1.86-1.26 2.68-1 2.68-1 .53 1.34.2 2.33.1 2.58.62.69 1 1.56 1 2.62 0 3.74-2.28 4.57-4.45 4.81.35.3.66.9.66 1.81V19.8c0 .26.18.57.68.47 3.87-1.29 6.66-4.94 6.66-9.24 0-5.38-4.37-9.75-9.75-9.75z"/></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                                <h3 class="project-title">Python Mini Projects</h3>
+                                <p class="project-desc">
+                                    A bundle of applications including Face Detection utilities, secure password generators, and interactive logic games (Tic-Tac-Toe, Rock-Paper-Scissors).
+                                </p>
+                                <div class="project-tags">
+                                    <span class="project-tag">Python</span>
+                                    <span class="project-tag">OpenCV</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5: Traffic Flow Analytics -->
+                <div class="project-item reveal" data-category="ai-ml">
+                    <div class="galaxy-card-border tilt-card-wrap">
+                        <div class="galaxy-card project-card tilt-card">
+                            <div class="tilt-inner">
+                                <div class="project-card-header">
+                                    <div class="project-icon">
+                                        <svg viewBox="0 0 24 24"><path d="M12 2c-4.41 0-8 3.59-8 8v8c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8c0-4.41-3.59-8-8-8zm0 15c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm0-8c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg>
+                                    </div>
+                                    <div class="project-links">
+                                        <a href="https://github.com/Pujan64" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="GitHub Repository">
+                                            <svg viewBox="0 0 24 24"><path d="M12 2.24c-5.38 0-9.75 4.37-9.75 9.75 0 4.3 2.79 7.95 6.66 9.24.49.09.67-.21.67-.47v-1.65c-2.71.59-3.29-1.31-3.29-1.31-.44-1.12-1.08-1.42-1.08-1.42-.89-.61.07-.6.07-.6 1 .07 1.51 1.02 1.51 1.02.87 1.49 2.29 1.06 2.85.81.09-.63.34-1.06.62-1.31-2.16-.24-4.43-1.08-4.43-4.81 0-1.06.38-1.93 1-2.62-.1-.25-.43-1.24.1-2.58 0 0 .82-.26 2.68 1 .78-.22 1.62-.32 2.45-.32.83 0 1.67.1 2.45.32 1.86-1.26 2.68-1 2.68-1 .53 1.34.2 2.33.1 2.58.62.69 1 1.56 1 2.62 0 3.74-2.28 4.57-4.45 4.81.35.3.66.9.66 1.81V19.8c0 .26.18.57.68.47 3.87-1.29 6.66-4.94 6.66-9.24 0-5.38-4.37-9.75-9.75-9.75z"/></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                                <h3 class="project-title">Traffic Analytics Tracker</h3>
+                                <p class="project-desc">
+                                    Engineered an intelligent traffic monitoring pipeline using YOLOv8 for vehicle classification and DeepSORT for multi-object tracking, computing real-time speed estimations.
+                                </p>
+                                <div class="project-tags">
+                                    <span class="project-tag">YOLOv8</span>
+                                    <span class="project-tag">DeepSORT</span>
+                                    <span class="project-tag">OpenCV</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6: Face Mask Detector -->
+                <div class="project-item reveal" data-category="ai-ml">
+                    <div class="galaxy-card-border tilt-card-wrap">
+                        <div class="galaxy-card project-card tilt-card">
+                            <div class="tilt-inner">
+                                <div class="project-card-header">
+                                    <div class="project-icon">
+                                        <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 5.52 4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>
+                                    </div>
+                                    <div class="project-links">
+                                        <a href="https://github.com/Pujan64" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="GitHub Repository">
+                                            <svg viewBox="0 0 24 24"><path d="M12 2.24c-5.38 0-9.75 4.37-9.75 9.75 0 4.3 2.79 7.95 6.66 9.24.49.09.67-.21.67-.47v-1.65c-2.71.59-3.29-1.31-3.29-1.31-.44-1.12-1.08-1.42-1.08-1.42-.89-.61.07-.6.07-.6 1 .07 1.51 1.02 1.51 1.02.87 1.49 2.29 1.06 2.85.81.09-.63.34-1.06.62-1.31-2.16-.24-4.43-1.08-4.43-4.81 0-1.06.38-1.93 1-2.62-.1-.25-.43-1.24.1-2.58 0 0 .82-.26 2.68 1 .78-.22 1.62-.32 2.45-.32.83 0 1.67.1 2.45.32 1.86-1.26 2.68-1 2.68-1 .53 1.34.2 2.33.1 2.58.62.69 1 1.56 1 2.62 0 3.74-2.28 4.57-4.45 4.81.35.3.66.9.66 1.81V19.8c0 .26.18.57.68.47 3.87-1.29 6.66-4.94 6.66-9.24 0-5.38-4.37-9.75-9.75-9.75z"/></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                                <h3 class="project-title">AI Mask Detection System</h3>
+                                <p class="project-desc">
+                                    Developed a real-time mask detection model using MobileNetV2 architecture with OpenCV streams, achieving a validation accuracy of 98.2%.
+                                </p>
+                                <div class="project-tags">
+                                    <span class="project-tag">TensorFlow</span>
+                                    <span class="project-tag">MobileNetV2</span>
+                                    <span class="project-tag">OpenCV</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience & Education Section -->
+        <section id="experience">
+            <div class="section-header reveal">
+                <h2>Journey <span>Timeline</span></h2>
+                <p>My career steps, educational checkpoints, and key milestones.</p>
+            </div>
+            
+            <div class="journey-columns reveal">
+                <!-- Column 1: Experience -->
+                <div class="journey-col">
+                    <h3 class="journey-col-title">
+                        <svg viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></svg>
+                        Professional Experience
+                    </h3>
+                    <div class="timeline-container">
+                        <!-- Gliding Rocket Indicator -->
+                        <div class="timeline-rocket scroll-rocket">
+                            <div class="timeline-rocket-fins"></div>
+                            <div class="timeline-rocket-body"></div>
+                            <div class="timeline-rocket-flame"></div>
+                        </div>
+                        
+                        <!-- Item 1: Nxon Ai -->
+                        <div class="timeline-item">
+                            <div class="timeline-badge"></div>
+                            <div class="timeline-header">
+                                <div class="timeline-title">
+                                    <h3>Nxon Ai Pvt. Ltd.</h3>
+                                    <h4>AI/ML Developer Intern</h4>
+                                </div>
+                                <span class="timeline-date">May 2026 – Present</span>
+                            </div>
+                            <div class="timeline-body">
+                                <ul>
+                                    <li>Engineered and optimized low-latency <strong>Computer Vision</strong> and <strong>Deep Learning</strong> models utilizing <strong>YOLO</strong> and <strong>OpenCV</strong> architectures.</li>
+                                    <li>Implemented high-throughput, production-ready Python pipelines for real-time image preprocessing and sub-15ms model inference.</li>
+                                    <li>Collaborated on end-to-end model deployment, hyperparameters tuning, and quantization, increasing inference speed by <strong>15%</strong> and object detection precision.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Item 2: Codesoft -->
+                        <div class="timeline-item">
+                            <div class="timeline-badge"></div>
+                            <div class="timeline-header">
+                                <div class="timeline-title">
+                                    <h3>Codesoft</h3>
+                                    <h4>Python Programming Developer Intern</h4>
+                                </div>
+                                <span class="timeline-date">Dec 2024 – Jan 2025</span>
+                            </div>
+                            <div class="timeline-body">
+                                <ul>
+                                    <li>Developed robust Python-based software applications, focusing on data structures, algorithmic optimization, and data handling workflows.</li>
+                                    <li>Wrote clean, modular, and highly documented codebase elements, reducing technical debt and improving readability.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2: Education -->
+                <div class="journey-col">
+                    <h3 class="journey-col-title">
+                        <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5.89 12.55L12 15.88l6.11-3.33c.75.92 1.89 1.45 3.09 1.45H22V21c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2v-7.1h.8c1.2 0 2.34-.53 3.09-1.45z"/></svg>
+                        Academic Foundations
+                    </h3>
+                    <div class="timeline-container">
+                        <!-- Gliding Rocket Indicator -->
+                        <div class="timeline-rocket scroll-rocket">
+                            <div class="timeline-rocket-fins"></div>
+                            <div class="timeline-rocket-body"></div>
+                            <div class="timeline-rocket-flame"></div>
+                        </div>
+                        
+                        <!-- Item 1: B.Tech -->
+                        <div class="timeline-item">
+                            <div class="timeline-badge"></div>
+                            <div class="timeline-header">
+                                <div class="timeline-title">
+                                    <h3>Silver Oak University</h3>
+                                    <h4>B.Tech in Computer Engineering</h4>
+                                </div>
+                                <span class="timeline-date">2023 – 2026</span>
+                             </div>
+                             <div class="timeline-body">
+                                 <ul>
+                                     <li>Graduating with a high-standing <strong>9.22 CGPA</strong> with specialized Honors in <strong>Artificial Intelligence and Machine Learning</strong>.</li>
+                                     <li>Core coursework: Advanced Machine Learning, Database Management Systems (DBMS), Operating Systems, Computer Networks, and Object-Oriented Programming (OOPs).</li>
+                                 </ul>
+                             </div>
+                         </div>
+
+                         <!-- Item 2: Madhav School -->
+                         <div class="timeline-item">
+                             <div class="timeline-badge"></div>
+                             <div class="timeline-header">
+                                 <div class="timeline-title">
+                                     <h3>Madhav International School</h3>
+                                     <h4>SSC & HSC Science (PCM)</h4>
+                                 </div>
+                                 <span class="timeline-date">2020 – 2022</span>
+                             </div>
+                             <div class="timeline-body">
+                                 <ul>
+                                     <li>Completed higher secondary certifications with scores of <strong>75%</strong> and <strong>60%</strong> in Science (PCM) stream.</li>
+                                     <li>Acquired fundamental quantitative background in physics, chemistry, and high-level mathematics.</li>
+                                 </ul>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" style="margin-bottom: 4rem;">
+            <div class="section-header reveal">
+                <h2>Get in <span>Touch</span></h2>
+                <p>Send a message directly to my console or contact me through typical channels.</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <h3>Let's collaborate!</h3>
+                    <p>
+                        I am currently open to exciting internship opportunities, AI research collaborations, or custom web projects. Drop a line if you have an idea you'd like to bring to life.
+                    </p>
+
+                    <div class="contact-methods">
+                        <!-- Email -->
+                        <div class="contact-method">
+                            <div class="contact-method-icon">
+                                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                            </div>
+                            <div class="contact-method-details">
+                                <h4>Email</h4>
+                                <a href="mailto:patelpujan2564@gmail.com">patelpujan2564@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="contact-method">
+                            <div class="contact-method-icon">
+                                <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.15 15.15 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                            </div>
+                            <div class="contact-method-details">
+                                <h4>Phone</h4>
+                                <p>+91 7984360610</p>
+                            </div>
+                        </div>
+
+                        <!-- Location -->
+                        <div class="contact-method">
+                            <div class="contact-method-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                            </div>
+                            <div class="contact-method-details">
+                                <h4>Location</h4>
+                                <p>Ahmedabad, Gujarat, India</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <div class="galaxy-card-border reveal">
+                    <div class="galaxy-card" style="padding: 2.25rem;">
+                        <div class="contact-oscilloscope-wrap">
+                            <span class="contact-oscilloscope-label">TRANSMISSION FREQUENCY</span>
+                            <svg class="contact-oscilloscope" viewBox="0 0 400 70">
+                                <path id="osc-path" d="M 0 35 Q 20 35 40 35 T 80 35 T 120 35 T 160 35 T 200 35 T 240 35 T 280 35 T 320 35 T 360 35 T 400 35" />
+                            </svg>
+                        </div>
+                        <form id="contact-form" class="contact-form">
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" class="form-control" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" class="form-control" placeholder="Your Email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" class="form-control" placeholder="Project Topic" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" placeholder="Type transmission details here..." required></textarea>
+                        </div>
+                        <div class="submit-btn-wrap">
+                            <button type="submit" class="btn btn-primary">Transmit Signal</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <a href="#" class="logo">
+                <span>PUJAN</span> PATEL<span class="logo-dot"></span>
+            </a>
+            <p class="footer-copy">&copy; 2026 Pujan Patel. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
