@@ -29,6 +29,36 @@
         </div>
     </div>
 
+    <!-- AI Thinking Mode Overlay -->
+    <div id="thinking-overlay">
+        <div class="thinking-console">
+            <div class="console-title">[ COGNITIVE REROUTING ]</div>
+            <div class="console-body" id="thinking-logs">
+                <div>> INITIATING DYNAMIC MEMORY SECTOR SWEEP...</div>
+                <div>> RESOLVING SPATIAL VECTORS...</div>
+                <div>> SHIFTING COGNITIVE FOCUS POINT...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Command Palette (Ctrl+K) -->
+    <div id="command-palette">
+        <div class="palette-box">
+            <div class="palette-header">
+                <span class="cmd-prompt">></span>
+                <input type="text" id="palette-search" placeholder="Search cognitive nodes (About, Skills, Projects, Credentials)..." autocomplete="off">
+            </div>
+            <ul class="palette-results" id="palette-results">
+                <!-- Dynamically filled via JS -->
+            </ul>
+            <div class="palette-footer">
+                <span>[↑↓] Navigate</span>
+                <span>[Enter] Select</span>
+                <span>[Esc] Close</span>
+            </div>
+        </div>
+    </div>
+
     <!-- GPU Accelerated Neural Network canvas -->
     <canvas id="bg-canvas"></canvas>
 
@@ -38,6 +68,10 @@
             <div class="system-status">
                 <span class="status-indicator online"></span>
                 <span class="status-lbl">SYS.ONLINE</span>
+                <span class="hud-meta-divider">|</span>
+                <span class="hud-meta-item">UPTIME: <strong>99.98%</strong></span>
+                <span class="hud-meta-divider">|</span>
+                <span class="hud-meta-item">SYNAPSE_NODES: <strong>300</strong></span>
             </div>
             <ul class="cognitive-regions">
                 <li><a href="#hero" class="active" data-region="perception">PERCEPTION</a></li>
@@ -45,6 +79,7 @@
                 <li><a href="#expertise" data-region="reasoning">REASONING</a></li>
                 <li><a href="#projects" data-region="execution">EXECUTION</a></li>
                 <li><a href="#experience" data-region="memory-formation">TIMELINE</a></li>
+                <li><a href="#achievements" data-region="credentials">CREDENTIALS</a></li>
                 <li><a href="#contact" data-region="communication">COMMUNICATION</a></li>
             </ul>
             <div class="nav-actions">
@@ -102,6 +137,7 @@
                 <div class="hero-actions">
                     <a href="#contact" class="btn btn-accent">Let's Connect</a>
                     <a href="Resume_PujanPatel.pdf" download class="btn btn-surface">Download Resume</a>
+                    <button class="btn btn-search-trigger" id="palette-trigger" aria-label="Open Command Palette">Search (Ctrl+K)</button>
                 </div>
                 <div class="hero-socials">
                     <a href="https://www.linkedin.com/in/patelpujan64/" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
@@ -215,13 +251,16 @@
                     <span class="panel-tag">[ COGNITIVE_NODE_04 ]</span>
                     <span class="panel-title-hud">ACTIVE COGNITIVE PATHWAYS (PROJECTS)</span>
                 </div>
-                <p class="section-lead">Hover over any pathway header to activate neural pulse signals along its operational stack.</p>
+                <p class="section-lead">Animate project pipeline nodes to trace real-time operational pathways.</p>
 
                 <div class="pathway-list">
                     <!-- Project 1 -->
                     <div class="project-pathway" data-project="focusvision">
                         <div class="pathway-meta">
-                            <h3>FocusVision Reticle</h3>
+                            <div class="pathway-title-wrap">
+                                <span class="pathway-index">PATHWAY_A //</span>
+                                <h3>FocusVision Reticle</h3>
+                            </div>
                             <p>Real-time attention tracking & distraction monitor. Implements facial landmark triangulation and blink frequency filters.</p>
                             <div class="pathway-links">
                                 <a href="https://github.com/Pujan64" target="_blank" rel="noopener noreferrer">REPO</a>
@@ -251,7 +290,10 @@
                     <!-- Project 2 -->
                     <div class="project-pathway" data-project="anpr">
                         <div class="pathway-meta">
-                            <h3>Automatic License Plate Recognition</h3>
+                            <div class="pathway-title-wrap">
+                                <span class="pathway-index">PATHWAY_B //</span>
+                                <h3>Automatic License Plate Recognition</h3>
+                            </div>
                             <p>End-to-end ANPR framework. Localizes plates in high-speed traffic feeds, denoises imagery, and decodes textual values.</p>
                             <div class="pathway-links">
                                 <a href="https://github.com/Pujan64" target="_blank" rel="noopener noreferrer">REPO</a>
@@ -279,7 +321,10 @@
                     <!-- Project 3 -->
                     <div class="project-pathway" data-project="traffic">
                         <div class="pathway-meta">
-                            <h3>Real-Time Multi-Object Traffic Tracker</h3>
+                            <div class="pathway-title-wrap">
+                                <span class="pathway-index">PATHWAY_C //</span>
+                                <h3>Real-Time Multi-Object Traffic Tracker</h3>
+                            </div>
                             <p>High-accuracy vehicle detection and speed evaluation. Combines object boundaries with visual trackers to maintain entity history.</p>
                             <div class="pathway-links">
                                 <a href="https://github.com/Pujan64" target="_blank" rel="noopener noreferrer">REPO</a>
@@ -307,7 +352,10 @@
                     <!-- Project 4 -->
                     <div class="project-pathway" data-project="mask">
                         <div class="pathway-meta">
-                            <h3>Mask Detection Pipeline</h3>
+                            <div class="pathway-title-wrap">
+                                <span class="pathway-index">PATHWAY_D //</span>
+                                <h3>Mask Detection Pipeline</h3>
+                            </div>
                             <p>Real-time security pipeline detecting face mask compliance. Trained with transfer learning for robust orientation capability.</p>
                             <div class="pathway-links">
                                 <a href="https://github.com/Pujan64" target="_blank" rel="noopener noreferrer">REPO</a>
@@ -330,6 +378,32 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Embedding Space Similarity Sub-Panel -->
+                <div class="embedding-space-panel">
+                    <div class="panel-header">
+                        <span class="panel-tag">[ COGNITIVE_NODE_04.1 ]</span>
+                        <span class="panel-title-hud">EMBEDDING SPACE SIMILARITY MAP</span>
+                    </div>
+                    <p class="section-lead">A visual 2D projection clustering project weights by operational similarity. Click nodes to trace overlap.</p>
+                    <div class="embedding-map-container">
+                        <div class="embedding-cluster-indicator" style="top: 22%; left: 15%;" data-group="cv">
+                            <span class="cluster-dot cv-dot"></span>
+                            <span class="cluster-label">Computer Vision (YOLO/OpenCV)</span>
+                        </div>
+                        <div class="embedding-cluster-indicator" style="top: 75%; left: 55%;" data-group="web">
+                            <span class="cluster-dot web-dot"></span>
+                            <span class="cluster-label">Full Stack Integration</span>
+                        </div>
+                        <div class="embedding-vector-node" style="top: 35%; left: 28%;" data-project="anpr">ANPR System</div>
+                        <div class="embedding-vector-node" style="top: 48%; left: 24%;" data-project="traffic">Traffic Tracker</div>
+                        <div class="embedding-vector-node" style="top: 50%; left: 38%;" data-project="focusvision">FocusVision</div>
+                        <div class="embedding-vector-node" style="top: 28%; left: 34%;" data-project="mask">Mask Detector</div>
+                        <div class="embedding-vector-node" style="top: 65%; left: 75%;" data-project="finance">Finance Dashboard</div>
+                        <div class="embedding-vector-node" style="top: 80%; left: 68%;" data-project="utility">Multi-utility Suite</div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -399,11 +473,145 @@
             </div>
         </section>
 
+        <!-- Region: ACHIEVEMENTS (Certifications & Accolades) -->
+        <section id="achievements" class="dashboard-section">
+            <div class="achievements-panel reveal">
+                <div class="panel-header">
+                    <span class="panel-tag">[ COGNITIVE_NODE_06 ]</span>
+                    <span class="panel-title-hud">ACHIEVEMENTS & CERTIFICATIONS</span>
+                </div>
+                <p class="section-lead">Verified credentials mapped from E:\certificates. Click a node to open its credential data stream.</p>
+                
+                <div class="certificates-grid">
+                    <!-- AWS Academy Semester 1 -->
+                    <div class="cert-card">
+                        <div class="cert-glow-border"></div>
+                        <div class="cert-header">
+                            <span class="cert-badge">AWS ACADEMY</span>
+                            <span class="cert-date">DEC 2023</span>
+                        </div>
+                        <h4>Introduction to Cloud Semester 1</h4>
+                        <a href="certificates/AWS_Academy_Graduate___AWS_Academy_Introduction_to_Cloud_Semester_1_Badge20231230-34-cfqglf.pdf" target="_blank" class="cert-link-btn">[ DATA_STREAM_01 ]</a>
+                    </div>
+                    
+                    <!-- Ncode Infoway -->
+                    <div class="cert-card">
+                        <div class="cert-glow-border"></div>
+                        <div class="cert-header">
+                            <span class="cert-badge">INTERNSHIP</span>
+                            <span class="cert-date">JUL 2024</span>
+                        </div>
+                        <h4>Ncode Infoway Internship Completion</h4>
+                        <a href="certificates/Ncode infoway completion pujan.jpg" target="_blank" class="cert-link-btn">[ DATA_STREAM_02 ]</a>
+                    </div>
+                    
+                    <!-- AWS APAC -->
+                    <div class="cert-card">
+                        <div class="cert-glow-border"></div>
+                        <div class="cert-header">
+                            <span class="cert-badge">AWS APAC</span>
+                            <span class="cert-date">AUG 2024</span>
+                        </div>
+                        <h4>Solutions Architecture Simulation</h4>
+                        <a href="certificates/Pujan_AWS APAC_ohwkHmFpNTMeY3Sba_1724564778716_completion_certificate.pdf" target="_blank" class="cert-link-btn">[ DATA_STREAM_03 ]</a>
+                    </div>
+                    
+                    <!-- Accenture North America -->
+                    <div class="cert-card">
+                        <div class="cert-glow-border"></div>
+                        <div class="cert-header">
+                            <span class="cert-badge">ACCENTURE</span>
+                            <span class="cert-date">AUG 2024</span>
+                        </div>
+                        <h4>System Integration & Tech Consulting</h4>
+                        <a href="certificates/Pujan_Accenture North America_ohwkHmFpNTMeY3Sba_1724564775668_completion_certificate.pdf" target="_blank" class="cert-link-btn">[ DATA_STREAM_04 ]</a>
+                    </div>
+                    
+                    <!-- JP Morgan -->
+                    <div class="cert-card">
+                        <div class="cert-glow-border"></div>
+                        <div class="cert-header">
+                            <span class="cert-badge">J.P. MORGAN</span>
+                            <span class="cert-date">AUG 2024</span>
+                        </div>
+                        <h4>Software Engineering Job Simulation</h4>
+                        <a href="certificates/Pujan_J.P. Morgan_ohwkHmFpNTMeY3Sba_1724564781391_completion_certificate.pdf" target="_blank" class="cert-link-btn">[ DATA_STREAM_05 ]</a>
+                    </div>
+                    
+                    <!-- Tata Group -->
+                    <div class="cert-card">
+                        <div class="cert-glow-border"></div>
+                        <div class="cert-header">
+                            <span class="cert-badge">TATA GROUP</span>
+                            <span class="cert-date">AUG 2024</span>
+                        </div>
+                        <h4>Data Visualization & Analytics Simulation</h4>
+                        <a href="certificates/Pujan_Tata Group_jbktNYX59WSCHWE6Q_1724486923626_completion_certificate.pdf" target="_blank" class="cert-link-btn">[ DATA_STREAM_06 ]</a>
+                    </div>
+
+                    <!-- Codsoft -->
+                    <div class="cert-card">
+                        <div class="cert-glow-border"></div>
+                        <div class="cert-header">
+                            <span class="cert-badge">INTERNSHIP</span>
+                            <span class="cert-date">OCT 2024</span>
+                        </div>
+                        <h4>Codsoft Programming Internship</h4>
+                        <a href="certificates/Codsoft Completed (1).pdf" target="_blank" class="cert-link-btn">[ DATA_STREAM_07 ]</a>
+                    </div>
+
+                    <!-- Coursera -->
+                    <div class="cert-card">
+                        <div class="cert-glow-border"></div>
+                        <div class="cert-header">
+                            <span class="cert-badge">COURSERA</span>
+                            <span class="cert-date">NOV 2024</span>
+                        </div>
+                        <h4>Deep Learning & AI Fundamentals</h4>
+                        <a href="certificates/Coursera 7UABEKDEBX7T.pdf" target="_blank" class="cert-link-btn">[ DATA_STREAM_08 ]</a>
+                    </div>
+
+                    <!-- Digital Marketing -->
+                    <div class="cert-card">
+                        <div class="cert-glow-border"></div>
+                        <div class="cert-header">
+                            <span class="cert-badge">FUNDAMENTALS</span>
+                            <span class="cert-date">JAN 2024</span>
+                        </div>
+                        <h4>Digital Marketing & Analytics</h4>
+                        <a href="certificates/Digitalmarketing.pdf" target="_blank" class="cert-link-btn">[ DATA_STREAM_09 ]</a>
+                    </div>
+
+                    <!-- Government Verification -->
+                    <div class="cert-card">
+                        <div class="cert-glow-border"></div>
+                        <div class="cert-header">
+                            <span class="cert-badge">GOVT CONF</span>
+                            <span class="cert-date">JAN 2024</span>
+                        </div>
+                        <h4>National Tech Certification</h4>
+                        <a href="certificates/Gov. certificate-01012024213436539.pdf" target="_blank" class="cert-link-btn">[ DATA_STREAM_10 ]</a>
+                    </div>
+
+                    <!-- Judmbel Programming -->
+                    <div class="cert-card">
+                        <div class="cert-glow-border"></div>
+                        <div class="cert-header">
+                            <span class="cert-badge">JUDMBEL</span>
+                            <span class="cert-date">JUL 2024</span>
+                        </div>
+                        <h4>Advanced Programming Completion</h4>
+                        <a href="certificates/judmbel programming-20240715-WA0016..pdf" target="_blank" class="cert-link-btn">[ DATA_STREAM_11 ]</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Region: COMMUNICATION (Contact / Transmission control) -->
         <section id="contact" class="dashboard-section">
             <div class="contact-panel reveal">
                 <div class="panel-header">
-                    <span class="panel-tag">[ COGNITIVE_NODE_06 ]</span>
+                    <span class="panel-tag">[ COGNITIVE_NODE_07 ]</span>
                     <span class="panel-title-hud">TRANSMISSION CONTROL</span>
                 </div>
                 <div class="contact-flex-layout">
