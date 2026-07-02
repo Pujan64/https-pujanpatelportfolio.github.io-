@@ -335,22 +335,21 @@ section {
     -webkit-text-fill-color: transparent;
 }
 
-.hero-typing {
-    font-size: 1.5rem;
-    color: var(--text-secondary);
-    min-height: 40px;
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 5px;
+.hero-subtitle {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.35;
+    margin-bottom: 2.2rem;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
 }
 
-.typed-cursor {
+.hero-subtitle span {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     display: inline-block;
-    width: 3px;
-    height: 1.4rem;
-    background-color: var(--accent-primary);
-    animation: blink 0.8s infinite;
 }
 
 @keyframes blink {
@@ -1905,6 +1904,10 @@ footer {
     
     .hero-content h1 {
         font-size: 3rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.6rem;
     }
     
     .form-group-row {
