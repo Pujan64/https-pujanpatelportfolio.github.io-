@@ -24,7 +24,7 @@
     --border-color: rgba(79, 157, 255, 0.12);
     --border-hover: rgba(79, 157, 255, 0.3);
     
-    --glass-bg: rgba(14, 17, 23, 0.7);
+    --glass-bg: rgba(14, 17, 23, 0.75);
     --glass-blur: blur(16px);
 }
 
@@ -521,17 +521,17 @@ body {
 .dashboard-container {
     position: relative;
     z-index: 5;
-    padding-top: 10rem;
-    padding-bottom: 8rem;
+    padding-top: 5rem;
+    padding-bottom: 4rem;
     width: 100%;
 }
 
 .dashboard-section {
-    min-height: 100vh;
+    min-height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10rem 5%; /* Increased padding to make layout spacious */
+    padding: 2.5rem 5%;
 }
 
 /* Floating Glass Panels */
@@ -548,10 +548,10 @@ body {
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
     border-radius: 20px;
-    padding: 4.5rem; /* Increased padding */
+    padding: 3.5rem;
     width: 100%;
     max-width: 1100px;
-    margin: 4rem auto; /* Spacious margins */
+    margin: 1.5rem auto;
     transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
 }
 
@@ -824,10 +824,23 @@ body {
 
 .expertise-cluster h3 {
     font-size: 1.1rem;
-    font-weight: 700;
+    font-weight: 800;
     margin-bottom: 1.5rem;
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 0.5rem;
+    background: linear-gradient(135deg, #ffffff 60%, rgba(79, 157, 255, 0.7) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(79, 157, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.expertise-cluster:hover h3 {
+    background: linear-gradient(135deg, #ffffff 10%, var(--accent-primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 15px var(--accent-glow);
+    border-color: rgba(79, 157, 255, 0.25);
 }
 
 .skill-nodes {
@@ -936,16 +949,21 @@ body {
 .pathway-title-wrap h3 {
     font-size: 1.6rem;
     font-weight: 800;
-    color: #ffffff;
+    background: linear-gradient(135deg, #ffffff 40%, rgba(79, 157, 255, 0.7) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     text-transform: uppercase;
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.08);
+    text-shadow: 0 0 10px rgba(79, 157, 255, 0.1);
 }
 
 .project-pathway:hover .pathway-title-wrap h3 {
-    color: #ffffff;
-    text-shadow: 0 0 15px var(--accent-glow), 0 0 2px #ffffff;
-    transform: translateX(5px);
+    background: linear-gradient(135deg, #ffffff 10%, var(--accent-primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px var(--accent-glow);
+    transform: translateX(8px);
+    letter-spacing: 0.5px;
 }
 
 .pathway-meta p {
@@ -1072,71 +1090,6 @@ body {
     color: var(--text-primary);
 }
 
-/* Embedding Space Similarity Panel */
-.embedding-space-panel {
-    margin-top: 5rem;
-    border-top: 1px solid var(--border-color);
-    padding-top: 3.5rem;
-}
-
-.embedding-map-container {
-    position: relative;
-    background: rgba(5, 7, 11, 0.85);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    height: 380px;
-    margin-top: 2rem;
-    overflow: hidden;
-}
-
-.embedding-cluster-indicator {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    background: rgba(0,0,0,0.3);
-    padding: 0.3rem 0.6rem;
-    border-radius: 6px;
-    pointer-events: none;
-}
-
-.cluster-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    display: inline-block;
-}
-
-.cv-dot { background-color: var(--accent-primary); box-shadow: 0 0 8px var(--accent-primary); }
-.web-dot { background-color: var(--color-warning); box-shadow: 0 0 8px var(--color-warning); }
-
-.embedding-vector-node {
-    position: absolute;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--text-secondary);
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--border-color);
-    padding: 0.4rem 0.85rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    transform: translate(-50%, -50%);
-}
-
-.embedding-vector-node:hover,
-.embedding-vector-node.active-vector {
-    color: #ffffff;
-    border-color: var(--accent-primary);
-    background: rgba(79, 157, 255, 0.15);
-    box-shadow: 0 0 12px var(--accent-glow);
-    transform: translate(-50%, -50%) scale(1.08);
-}
 
 /* =========================================================================
    Timeline Section (Memory Timeline)
@@ -1225,6 +1178,7 @@ body {
 /* =========================================================================
    Achievements Section (Certificates Grid)
    ========================================================================= */
+/* Achievements Section (Certificates Grid) */
 .certificates-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1233,26 +1187,123 @@ body {
 
 .cert-card {
     position: relative;
-    background: rgba(255, 255, 255, 0.01);
+    background: rgba(14, 17, 23, 0.45);
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    padding: 1.75rem;
-    transition: all 0.3s ease;
+    padding: 2rem 1.75rem 1.75rem 2rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 190px;
+    min-height: 250px;
     overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform-style: preserve-3d;
+    opacity: 0;
+    transform: translateY(25px);
+}
+
+/* Achievements Panel Scroll Stagger Animation */
+.achievements-panel.active .cert-card {
+    animation: fadeUpIn 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+.achievements-panel.active .cert-card:nth-child(1) { animation-delay: 0.05s; }
+.achievements-panel.active .cert-card:nth-child(2) { animation-delay: 0.1s; }
+.achievements-panel.active .cert-card:nth-child(3) { animation-delay: 0.15s; }
+.achievements-panel.active .cert-card:nth-child(4) { animation-delay: 0.2s; }
+.achievements-panel.active .cert-card:nth-child(5) { animation-delay: 0.25s; }
+.achievements-panel.active .cert-card:nth-child(6) { animation-delay: 0.3s; }
+.achievements-panel.active .cert-card:nth-child(7) { animation-delay: 0.35s; }
+.achievements-panel.active .cert-card:nth-child(8) { animation-delay: 0.4s; }
+.achievements-panel.active .cert-card:nth-child(9) { animation-delay: 0.45s; }
+.achievements-panel.active .cert-card:nth-child(10) { animation-delay: 0.5s; }
+.achievements-panel.active .cert-card:nth-child(11) { animation-delay: 0.55s; }
+
+@keyframes fadeUpIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* LED Status indicator strip on the left edge */
+.cert-led-strip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--accent-primary);
+    box-shadow: 0 0 10px var(--accent-primary);
+    transition: all 0.3s ease;
+}
+
+.cert-led-strip.verified {
+    background: var(--color-success);
+    box-shadow: 0 0 10px var(--color-success);
+    animation: ledPulse 2s infinite alternate;
+}
+
+@keyframes ledPulse {
+    0% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
+
+/* Diagonal scanning light line */
+.cert-card::before {
+    content: '';
+    position: absolute;
+    top: -150%;
+    left: -150%;
+    width: 300%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(79, 157, 255, 0.06) 50%,
+        transparent
+    );
+    transform: rotate(45deg);
+    transition: all 0.7s ease;
+    pointer-events: none;
+}
+
+.cert-card:hover::before {
+    top: 150%;
+    left: 150%;
+}
+
+/* HUD brackets on hover */
+.cert-card::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.cert-card:hover::after {
+    border-color: rgba(79, 157, 255, 0.2);
+    box-shadow: inset 0 0 10px rgba(79, 157, 255, 0.05);
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
 }
 
 .cert-card:hover {
     border-color: var(--accent-primary);
-    background: rgba(79, 157, 255, 0.04);
-    transform: translateY(-4px);
+    background: rgba(14, 17, 23, 0.75);
+    transform: perspective(800px) rotateX(4deg) rotateY(-4deg) translateY(-5px);
     box-shadow: 
-        0 12px 30px rgba(0,0,0,0.6), 
-        0 0 15px rgba(79, 157, 255, 0.12),
-        inset 0 0 10px rgba(79, 157, 255, 0.05);
+        0 20px 45px rgba(0, 0, 0, 0.7), 
+        0 0 25px rgba(79, 157, 255, 0.15),
+        inset 0 0 15px rgba(79, 157, 255, 0.05);
 }
 
 .cert-header {
@@ -1262,12 +1313,14 @@ body {
     margin-bottom: 1rem;
     font-family: var(--font-mono);
     font-size: 0.7rem;
+    z-index: 2;
 }
 
 .cert-badge {
     color: var(--accent-primary);
     font-weight: 700;
     letter-spacing: 0.5px;
+    text-shadow: 0 0 8px var(--accent-glow);
 }
 
 .cert-date {
@@ -1275,26 +1328,92 @@ body {
 }
 
 .cert-card h4 {
-    font-size: 0.92rem;
+    font-size: 0.95rem;
     font-weight: 600;
-    color: #ffffff;
-    margin-bottom: 1.75rem;
+    background: linear-gradient(135deg, #ffffff 60%, rgba(79, 157, 255, 0.7) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
     line-height: 1.45;
+    z-index: 2;
+    transition: all 0.3s ease;
 }
 
-.cert-link-btn {
+.cert-card:hover h4 {
+    background: linear-gradient(135deg, #ffffff 10%, var(--accent-primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px var(--accent-glow);
+    transform: translateX(4px);
+}
+
+/* Futuristic display panel for details */
+.cert-telemetry {
+    background: rgba(5, 7, 11, 0.75);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    margin: 1rem 0;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.cert-card:hover .cert-telemetry {
+    border-color: rgba(79, 157, 255, 0.25);
+    background: rgba(5, 7, 11, 0.9);
+}
+
+.tel-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tel-row span {
+    color: var(--text-muted);
+}
+
+.hash-txt {
+    color: var(--text-secondary);
+    font-size: 0.62rem;
+    letter-spacing: 0.5px;
+}
+
+/* Action button terminal styling */
+.cert-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(79, 157, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.65rem;
+    color: var(--accent-primary);
     font-family: var(--font-mono);
     font-size: 0.72rem;
-    color: var(--text-secondary);
-    text-decoration: none;
     font-weight: 700;
+    text-decoration: none;
     transition: all 0.3s ease;
-    display: inline-block;
+    z-index: 2;
+    gap: 6px;
 }
 
-.cert-card:hover .cert-link-btn {
-    color: #ffffff;
-    text-shadow: 0 0 8px var(--accent-glow);
+.cert-action-btn:hover {
+    background: var(--accent-primary);
+    color: #05070B;
+    box-shadow: 0 0 15px rgba(79, 157, 255, 0.35);
+    transform: translateY(-2px);
+}
+
+.btn-prompt {
+    font-weight: 800;
+    opacity: 0.8;
 }
 
 /* =========================================================================
@@ -1308,8 +1427,19 @@ body {
 
 .contact-info-hud h3 {
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 800;
     margin-bottom: 1.25rem;
+    background: linear-gradient(135deg, #ffffff 40%, rgba(79, 157, 255, 0.7) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(79, 157, 255, 0.15);
+    transition: all 0.3s ease;
+}
+
+.contact-info-hud h3:hover {
+    text-shadow: 0 0 18px var(--accent-glow);
+    letter-spacing: 0.5px;
 }
 
 .contact-info-hud p {

@@ -16,8 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. Command Palette (Ctrl+K) Console
     initCommandPalette();
 
-    // 6. Embedding Space Mapping
-    initEmbeddingSpace();
 
     // 7. System Diagnostics Theme Toggle
     initDiagnosticsToggle();
@@ -99,9 +97,9 @@ function initNeuralBrainCanvas() {
 
     // 3D Camera settings
     let camera = { x: 0, y: 0, z: -100, rotX: 0, rotY: 0 }; 
-    let targetCamera = { x: 0, y: 0, z: 850, rotX: 0, rotY: 0 }; 
+    let targetCamera = { x: 0, y: 0, z: 350, rotX: 0, rotY: 0 }; 
     const focalLength = 380;
-    let maxConnectionDist = 180; // Progression scroll dynamic connection limit
+    let maxConnectionDist = 250; // Progression scroll dynamic connection limit
 
     let mouse = { x: null, y: null, radius: 220 };
 
@@ -122,7 +120,7 @@ function initNeuralBrainCanvas() {
 
     // Camera pullback trigger
     triggerCanvasZoomOut = () => {
-        targetCamera.z = 850;
+        targetCamera.z = 350;
     };
 
     // Callback to highlight specific cluster nodes on skill hovers
@@ -151,7 +149,7 @@ function initNeuralBrainCanvas() {
             this.baseY = this.y;
             this.baseZ = this.z;
             
-            this.size = Math.random() * 2 + 1.25;
+            this.size = Math.random() * 3 + 2.25;
             this.vx = (Math.random() - 0.5) * 0.12;
             this.vy = (Math.random() - 0.5) * 0.12;
             this.vz = (Math.random() - 0.5) * 0.12;
@@ -172,8 +170,8 @@ function initNeuralBrainCanvas() {
         }
     }
 
-    // Populate double-hemisphere nodes
-    for (let i = 0; i < 350; i++) {
+    // Populate double-hemisphere nodes (increased density)
+    for (let i = 0; i < 650; i++) {
         particles.push(new NeuralNode(i % 2 === 0));
     }
 
@@ -269,15 +267,16 @@ function initNeuralBrainCanvas() {
     function renderCanvas() {
         ctx.clearRect(0, 0, width, height);
 
-        // Lerp camera settings
+        // Lerp camera settings with multi-axis organic drift
+        const driftTime = Date.now() * 0.00015;
+        const driftY = Math.sin(driftTime) * 0.18;
+        const driftX = Math.cos(driftTime * 0.85) * 0.1;
+
         camera.x += (targetCamera.x - camera.x) * 0.07;
         camera.y += (targetCamera.y - camera.y) * 0.07;
         camera.z += (targetCamera.z - camera.z) * 0.07;
-        camera.rotX += (targetCamera.rotX - camera.rotX) * 0.07;
-        camera.rotY += (targetCamera.rotY - camera.rotY) * 0.07;
-
-        // Space drift
-        targetCamera.rotY += 0.00035;
+        camera.rotX += (targetCamera.rotX + driftX - camera.rotX) * 0.07;
+        camera.rotY += (targetCamera.rotY + driftY - camera.rotY) * 0.07;
 
         let isDiag = document.body.classList.contains('light-mode') || document.body.classList.contains('diagnostics-active');
         let accentColor = isDiag ? '255, 82, 82' : '79, 157, 255';
@@ -323,23 +322,23 @@ function initNeuralBrainCanvas() {
                 if (dist < maxConnectionDist) {
                     let opacity = (1 - (dist / maxConnectionDist)) * 0.18;
 
-                    // Mouse proximity glow multiplier
+                    // Mouse proximity glow multiplier (increased transparency)
                     if (mouse.x && mouse.y) {
                         let avgX = (nA.proj.x + nB.proj.x) / 2;
                         let avgY = (nA.proj.y + nB.proj.y) / 2;
                         let mDist = Math.hypot(mouse.x - avgX, mouse.y - avgY);
                         if (mDist < mouse.radius) {
-                            opacity += (1 - (mDist / mouse.radius)) * 0.2;
+                            opacity += (1 - (mDist / mouse.radius)) * 0.12;
                         }
                     }
 
                     // Highlight connections if node is part of highlighted skill weights
                     if (nA.node.isHighlighted && nB.node.isHighlighted) {
-                        opacity *= 2.5;
+                        opacity *= 1.8;
                     }
 
                     ctx.strokeStyle = `rgba(${accentColor}, ${Math.min(1.0, opacity)})`;
-                    ctx.lineWidth = 0.5;
+                    ctx.lineWidth = 0.8;
                     ctx.beginPath();
                     ctx.moveTo(nA.proj.x, nA.proj.y);
                     ctx.lineTo(nB.proj.x, nB.proj.y);
@@ -354,8 +353,8 @@ function initNeuralBrainCanvas() {
                 if (rn.node.isHighlighted) {
                     let dist = Math.hypot(mouse.x - rn.proj.x, mouse.y - rn.proj.y);
                     if (dist < 400) {
-                        ctx.strokeStyle = `rgba(${accentColor}, ${(1 - (dist / 400)) * 0.35})`;
-                        ctx.lineWidth = 0.75;
+                        ctx.strokeStyle = `rgba(${accentColor}, ${(1 - (dist / 400)) * 0.18})`;
+                        ctx.lineWidth = 1.25;
                         ctx.beginPath();
                         ctx.moveTo(mouse.x, mouse.y);
                         ctx.lineTo(rn.proj.x, rn.proj.y);
@@ -372,7 +371,7 @@ function initNeuralBrainCanvas() {
             if (startProj && endProj) {
                 let x = startProj.x + (endProj.x - startProj.x) * s.progress;
                 let y = startProj.y + (endProj.y - startProj.y) * s.progress;
-                let size = (startProj.scale + (endProj.scale - startProj.scale) * s.progress) * 2;
+                let size = (startProj.scale + (endProj.scale - startProj.scale) * s.progress) * 3.5;
 
                 ctx.fillStyle = isDiag ? '#ff5252' : '#ffffff';
                 ctx.beginPath();
@@ -414,7 +413,7 @@ function initNeuralBrainCanvas() {
             if (headProj) {
                 ctx.fillStyle = isDiag ? '#ff5252' : '#ffffff';
                 ctx.beginPath();
-                ctx.arc(headProj.x, headProj.y, headProj.scale * 1.8, 0, Math.PI * 2);
+                ctx.arc(headProj.x, headProj.y, headProj.scale * 3.0, 0, Math.PI * 2);
                 ctx.fill();
             }
         });
@@ -428,7 +427,7 @@ function initNeuralBrainCanvas() {
                 let dist = Math.hypot(rn.proj.x - mouse.x, rn.proj.y - mouse.y);
                 if (dist < mouse.radius) {
                     let force = (mouse.radius - dist) / mouse.radius;
-                    opacity += force * 0.45;
+                    opacity += force * 0.22;
                     radius *= (1 + force * 0.25);
                 }
             }
@@ -452,18 +451,41 @@ function initNeuralBrainCanvas() {
         requestAnimationFrame(renderCanvas);
     }
 
+    // Dynamic metrics HUD logs simulator
+    let lastMetricsUpdate = 0;
+    function animateMetrics() {
+        const now = Date.now();
+        if (now - lastMetricsUpdate > 1200) {
+            lastMetricsUpdate = now;
+            
+            const latency = (Math.random() * 3.5 + 7.2).toFixed(1);
+            const fps = Math.round(1000 / parseFloat(latency));
+            const mem = (Math.random() * 2.2 + 13.1).toFixed(1);
+            
+            const infLatency = document.getElementById('hud-inf-latency');
+            const infRate = document.getElementById('hud-inf-rate');
+            const infRateMetric = document.getElementById('metric-latency');
+            const memUsage = document.getElementById('hud-mem-usage');
+
+            if (infLatency) infLatency.textContent = `${latency}ms`;
+            if (infRate) infRate.textContent = `${fps} FPS`;
+            if (infRateMetric) infRateMetric.textContent = `${fps} FPS`;
+            if (memUsage) memUsage.textContent = `${mem} MB`;
+        }
+    }
+
     // Scroll mapping linking camera & Neural Progression density
     window.addEventListener('scroll', () => {
         const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
         const scrollPct = window.scrollY / (maxScroll || 1);
 
-        targetCamera.z = 850 - scrollPct * 1150;
-        targetCamera.y = scrollPct * 320;
-        targetCamera.x = Math.sin(scrollPct * Math.PI) * 200;
-        targetCamera.rotX = -scrollPct * 0.32;
+        targetCamera.z = 350 - scrollPct * 650;
+        targetCamera.y = scrollPct * 200;
+        targetCamera.x = Math.sin(scrollPct * Math.PI) * 120;
+        targetCamera.rotX = -scrollPct * 0.25;
 
-        // Neural Progression: connections density grows as visitor explores deeper
-        maxConnectionDist = 180 + scrollPct * 90;
+        // Maintain high connectivity starting at PERCEPTION
+        maxConnectionDist = 250 + scrollPct * 40;
     });
 
     requestAnimationFrame(renderCanvas);
@@ -597,7 +619,7 @@ function initCommandPalette() {
         { title: "Project: License Plate ANPR", target: "#projects", category: "Pathway" },
         { title: "Project: Traffic Tracker", target: "#projects", category: "Pathway" },
         { title: "Project: Mask Detector", target: "#projects", category: "Pathway" },
-        { title: "Project Embedding Space Map", target: "#projects", category: "Mapping" },
+        { title: "Project: Neural Expense Flow (MERN)", target: "#projects", category: "Pathway" },
         { title: "Experience Timeline (Memory Formation)", target: "#experience", category: "Region" },
         { title: "Achievements & Credentials", target: "#achievements", category: "Region" },
         { title: "Transmission Control (Contact)", target: "#contact", category: "Region" },
@@ -716,83 +738,6 @@ function initCommandPalette() {
     }
 }
 
-/* =========================================================================
-   6. Embedding Space Mapping
-   ========================================================================= */
-function initEmbeddingSpace() {
-    const nodes = document.querySelectorAll('.embedding-vector-node');
-    const pathways = document.querySelectorAll('.project-pathway');
-
-    if (nodes.length === 0) return;
-
-    nodes.forEach(node => {
-        node.addEventListener('mouseenter', () => {
-            const pId = node.getAttribute('data-project');
-            node.classList.add('active-vector');
-
-            // Find and highlight corresponding project pathway
-            pathways.forEach(p => {
-                if (p.getAttribute('data-project') === pId) {
-                    p.style.borderColor = 'var(--accent-primary)';
-                    p.style.background = 'rgba(79, 157, 255, 0.05)';
-                    p.style.boxShadow = '0 0 15px rgba(79, 157, 255, 0.15)';
-                }
-            });
-        });
-
-        node.addEventListener('mouseleave', () => {
-            const pId = node.getAttribute('data-project');
-            node.classList.remove('active-vector');
-
-            pathways.forEach(p => {
-                if (p.getAttribute('data-project') === pId) {
-                    p.style.borderColor = '';
-                    p.style.background = '';
-                    p.style.boxShadow = '';
-                }
-            });
-        });
-
-        // Clicking vector flies directly to project section
-        node.addEventListener('click', () => {
-            const pId = node.getAttribute('data-project');
-            const pathway = document.querySelector(`.project-pathway[data-project="${pId}"]`);
-            if (pathway) {
-                pathway.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                // Double pulse trigger
-                pathway.style.transform = 'scale(1.02)';
-                setTimeout(() => { pathway.style.transform = ''; }, 300);
-            }
-        });
-    });
-
-    // Hover clusters lights up groups
-    const clusters = document.querySelectorAll('.embedding-cluster-indicator');
-    clusters.forEach(c => {
-        c.addEventListener('mouseenter', () => {
-            const group = c.getAttribute('data-group');
-            if (group === 'cv') {
-                nodes.forEach(n => {
-                    const p = n.getAttribute('data-project');
-                    if (['anpr', 'traffic', 'focusvision', 'mask'].includes(p)) {
-                        n.classList.add('active-vector');
-                    }
-                });
-            } else if (group === 'web') {
-                nodes.forEach(n => {
-                    const p = n.getAttribute('data-project');
-                    if (['finance', 'utility'].includes(p)) {
-                        n.classList.add('active-vector');
-                    }
-                });
-            }
-        });
-
-        c.addEventListener('mouseleave', () => {
-            nodes.forEach(n => n.classList.remove('active-vector'));
-        });
-    });
-}
 
 /* =========================================================================
    7. System Diagnostics Theme Toggle (Diagnostics Alert Mode)
